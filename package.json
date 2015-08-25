@@ -2,6 +2,13 @@
   "name": "globcat",
   "version": "0.1.0",
   "description": "Concatenate files from command line with glob pattern.",
+  "keywords": [
+    "glob",
+    "wildcard",
+    "file pattern",
+    "concatenate",
+    "command line"
+  ],
   "main": "globcat.js",
   "scripts": {
     "test": "mocha"
