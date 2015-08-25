@@ -25,3 +25,13 @@ Options are passed through to [glob][glob]. For option details please
 view the glob package.
 
 [glob]: https://www.npmjs.com/package/glob
+
+## Command Line
+
+```sh
+# using CLI arguments
+globcat path/*.txt other/**/*.txt --output combined.txt
+
+# using pipes
+cat file-with-paths.txt | globcat > combined.txt
+```
