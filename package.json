@@ -1,7 +1,7 @@
 {
   "name": "globcat",
   "version": "0.1.0",
-  "description": "concatenate files from command line with glob pattern",
+  "description": "Concatenate files from command line with glob pattern.",
   "main": "globcat.js",
   "scripts": {
     "test": "mocha"
@@ -20,6 +20,11 @@
     "mocha": "latest",
     "chai": "latest"
   },
-  "author": "Simon Ingeson <simon.ingeson@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/smonn/globcat.git"
+  },
+  "homepage": "https://github.com/smonn/globcat",
+  "author": "Simon Ingeson <simon.ingeson@gmail.com> (http://ingeson.se/)",
   "license": "MIT"
 }
