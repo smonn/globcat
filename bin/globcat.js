@@ -16,7 +16,11 @@ var cli = commandLineArgs([
 var combine = function (options) {
   var write = function (results) {
     if (options.output) {
-      fs.writeFileSync(path.join(process.cwd(), options.output), results);
+      fs.writeFile(path.join(process.cwd(), options.output), results, function (err) {
+        if (err) {
+          throw err;
+        }
+      });
     } else {
       process.stdout.write(results);
     }
@@ -28,7 +32,6 @@ var combine = function (options) {
         throw err;
       } else {
         write(results);
-        process.exit(0);
       }
     });
   };
