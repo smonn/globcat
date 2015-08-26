@@ -8,7 +8,7 @@ var handler = _.curry(function (options, pattern, callback) {
   glob(pattern, {}, callback);
 });
 
-module.exports = function (patterns, options, callback) {
+var globcat = function (patterns, options, callback) {
   var counter = 0,
     paths = [];
 
@@ -23,3 +23,5 @@ module.exports = function (patterns, options, callback) {
     }
   });
 };
+
+module.exports = globcat;

@@ -4,6 +4,7 @@ var commandLineArgs = require("command-line-args");
 var sh = require("shelljs");
 var glob = require("glob");
 var fs = require('fs');
+var path = require("path");
 var readline = require("readline");
 var globcat = require("../globcat");
 
@@ -12,46 +13,44 @@ var cli = commandLineArgs([
     { name: "output", alias: "o", type: String }
 ]);
 
-var options = cli.parse();
+var combine = function (options) {
+  var write = function (results) {
+    if (options.output) {
+      fs.writeFileSync(path.join(process.cwd(), options.output), results);
+    } else {
+      process.stdout.write(results);
+    }
+  };
 
-function write(results) {
-  if (options.output) {
-    fs.writeFile(options.output, results, function (err) {
+  var exec = function (patterns) {
+    globcat(patterns, {}, function (err, results) {
       if (err) {
         throw err;
+      } else {
+        write(results);
+        process.exit(0);
       }
     });
+  };
+
+  if (options.src) {
+    exec(options.src);
   } else {
-    process.stdout.write(results);
+    var rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout,
+        terminal: false
+      }),
+      lines = [];
+
+    rl.on("line", function (line) {
+      lines.push(line);
+    });
+
+    rl.on("close", function () {
+      exec(lines);
+    });
   }
-}
+};
 
-function exec(patterns) {
-  globcat(patterns, {}, function (err, results) {
-    if (err) {
-      throw err;
-    } else {
-      write(results);
-      process.exit(0);
-    }
-  });
-}
-
-if (options.src) {
-  exec(options.src);
-} else {
-  var rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout,
-      terminal: false
-    }),
-    lines = [];
-
-  rl.on("line", function (line) {
-    lines.push(line);
-  });
-
-  rl.on("close", function () {
-    exec(lines);
-  });
-}
+combine(cli.parse());
