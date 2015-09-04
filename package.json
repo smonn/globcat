@@ -17,15 +17,15 @@
     "globcat": "bin/globcat.js"
   },
   "dependencies": {
-    "shelljs": "~0.5.3",
-    "glob": "~5.0.14",
-    "command-line-args": "~1.0.0",
-    "async": "~1.4.2",
-    "ramda": "~0.17.1"
+    "async": "^1.4.2",
+    "command-line-args": "^1.0.0",
+    "glob": "^5.0.14",
+    "ramda": "^0.17.1",
+    "shelljs": "^0.5.3"
   },
   "devDependencies": {
-    "mocha": "~2.2.5",
-    "chai": "~3.2.0"
+    "chai": "^3.2.0",
+    "mocha": "^2.3.0"
   },
   "repository": {
     "type": "git",
