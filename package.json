@@ -27,11 +27,14 @@
     "chai": "^3.2.0",
     "mocha": "^2.3.0"
   },
+  "bugs": {
+    "url": "https://github.com/smonn/globcat/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/smonn/globcat.git"
+    "url": "git+ssh://git@github.com/smonn/globcat.git"
   },
-  "homepage": "https://github.com/smonn/globcat",
+  "homepage": "https://github.com/smonn/globcat#readme",
   "author": "Simon Ingeson <simon.ingeson@gmail.com> (http://ingeson.se/)",
   "license": "MIT"
 }
