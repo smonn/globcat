@@ -1,8 +1,6 @@
 #! /usr/bin/env node
 
 var commandLineArgs = require("command-line-args");
-var sh = require("shelljs");
-var glob = require("glob");
 var fs = require('fs');
 var path = require("path");
 var readline = require("readline");
