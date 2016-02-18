@@ -1,19 +1,24 @@
 #! /usr/bin/env node
 
-var commandLineArgs = require("command-line-args");
+'use strict';
+
+var commandLineArgs = require('command-line-args');
 var fs = require('fs');
-var path = require("path");
-var readline = require("readline");
-var globcat = require("../globcat");
+var path = require('path');
+var readline = require('readline');
+var globcat = require('../globcat');
 
 var cli = commandLineArgs([
-    { name: "src", alias: "s", type: String, multiple: true, defaultOption: true, description: "The source file globs" },
-    { name: "output", alias: "o", type: String, description: "The file to write the output to" },
-    { name: "help", alias: "h", type: Boolean, description: "Display this help text" }
+    { name: 'src', alias: 's', type: String, multiple: true,
+      defaultOption: true, description: 'The source file globs', },
+    { name: 'output', alias: 'o', type: String,
+      description: 'The file to write the output to', },
+    { name: 'help', alias: 'h', type: Boolean,
+      description: 'Display this help text', },
 ]);
 
-var combine = function (options) {
-  var write = function (results) {
+var combine = function(options) {
+  var write = function(results) {
     if (options.output) {
       var file = fs.createWriteStream(path.join(process.cwd(), options.output));
       results.pipe(file);
@@ -22,8 +27,8 @@ var combine = function (options) {
     }
   };
 
-  var exec = function (patterns) {
-    globcat(patterns, { stream: true }, function (err, results) {
+  var exec = function(patterns) {
+    globcat(patterns, { stream: true }, function(err, results) {
       if (err) {
         throw err;
       } else {
@@ -36,17 +41,17 @@ var combine = function (options) {
     exec(options.src);
   } else {
     var rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout,
-        terminal: false
-      }),
-      lines = [];
+      input: process.stdin,
+      output: process.stdout,
+      terminal: false,
+    });
+    var lines = [];
 
-    rl.on("line", function (line) {
+    rl.on('line', function(line) {
       lines.push(line);
     });
 
-    rl.on("close", function () {
+    rl.on('close', function() {
       exec(lines);
     });
   }
@@ -56,8 +61,8 @@ var options = cli.parse();
 
 if (options.help) {
   console.log(cli.getUsage({
-    title: "globcat",
-    description: "Concatenate files from command line with glob pattern."
+    title: 'globcat',
+    description: 'Concatenate files from command line with glob pattern.',
   }));
 } else {
   combine(options);

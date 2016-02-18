@@ -1,21 +1,23 @@
+'use strict';
 
-var glob = require("glob");
-var async = require("async");
-var _ = require("ramda");
-var combined = require("combined-stream2");
-var fs = require("fs");
+var glob = require('glob');
+var async = require('async');
+var _ = require('ramda');
+var combined = require('combined-stream2');
+var fs = require('fs');
 
-var handler = _.curry(function (options, pattern, callback) {
+var handler = _.curry(function(options, pattern, callback) {
   glob(pattern, options.glob || {}, callback);
 });
 
-var createStream = function (path, callback) {
+var createStream = function(path, callback) {
   callback(null, fs.createReadStream(path));
 };
 
-var combineStreams = function (callback) {
-  return function (err, streams) {
+var combineStreams = function(callback) {
+  return function(err, streams) {
     var stream;
+
     if (err) {
       callback(err);
     } else {
@@ -26,40 +28,41 @@ var combineStreams = function (callback) {
   };
 };
 
-var combineToString = function (callback) {
-  return combineStreams(function (err, stream) {
-    var str = "";
+var combineToString = function(callback) {
+  return combineStreams(function(err, stream) {
+    var str = '';
+
     if (err) {
       callback(err);
       return;
     }
-    stream.on("data", function (buffer) {
+
+    stream.on('data', function(buffer) {
       str += buffer.toString();
     });
-    stream.on("error", function (err) {
+
+    stream.on('error', function(err) {
       callback(err);
     });
-    stream.on("end", function () {
+
+    stream.on('end', function() {
       callback(null, str);
     });
   });
 };
 
-var globcat = function (patterns, options, callback) {
-  var counter = 0,
-    paths = [];
-
+var globcat = function(patterns, options, callback) {
   options = options || { glob: {}, stream: false };
   patterns = Array.isArray(patterns) ? patterns : [patterns];
 
-  async.map(patterns, handler(options), function (err, results) {
+  async.map(patterns, handler(options), function(err, results) {
     var paths = _.uniq(_.flatten(results));
+
     if (err) {
       callback(err);
     } else {
-      async.map(paths, createStream, options.stream
-          ? combineStreams(callback)
-          : combineToString(callback));
+      async.map(paths, createStream,
+        options.stream ? combineStreams(callback) : combineToString(callback));
     }
   });
 };

@@ -51,6 +51,10 @@ cat file-with-paths.txt | globcat > combined.txt
 
 # Changelog
 
+## 0.2.2
+
+- Applied JSCS and JSHint through Gulp.
+
 ## 0.2.1
 
 - Removed dependency on shelljs for string results.
