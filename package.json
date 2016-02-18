@@ -17,15 +17,15 @@
     "globcat": "bin/globcat.js"
   },
   "dependencies": {
-    "async": "^1.4.2",
-    "command-line-args": "^1.0.0",
-    "glob": "^5.0.14",
-    "ramda": "^0.17.1",
-    "shelljs": "^0.5.3"
+    "async": "~1.5.2",
+    "command-line-args": "~2.1.6",
+    "glob": "~7.0.0",
+    "ramda": "~0.19.1",
+    "shelljs": "~0.6.0"
   },
   "devDependencies": {
-    "chai": "^3.2.0",
-    "mocha": "^2.3.0"
+    "chai": "^3.5.0",
+    "mocha": "^2.4.5"
   },
   "bugs": {
     "url": "https://github.com/smonn/globcat/issues"
