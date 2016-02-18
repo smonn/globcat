@@ -28,8 +28,10 @@ globcat(["path/to/file.txt", "other/path/*.txt"], options, function (err, conten
 
 ## Options
 
-Options are passed through to [glob][glob]. For option details please
-view the glob package. Thanks glob and minimatch for your excellence! :)
+- `stream` Set to `true` to get a readable stream instead of string in the
+  callback. Defaults to `false`.
+- `glob` Is passed through to [glob][glob]. For option details please
+  view the glob package. Thanks glob and minimatch for your excellence! :)
 
 [glob]: https://www.npmjs.com/package/glob
 
@@ -46,3 +48,15 @@ Using pipes:
 ```sh
 cat file-with-paths.txt | globcat > combined.txt
 ```
+
+# Changelog
+
+## 0.2.0
+
+- Added support to return readable streams instead of string.
+- CLI now uses streams to write output.
+- Fixed missing feature to forward glob options.
+
+## 0.1.6
+
+- Updated dependencies.

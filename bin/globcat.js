@@ -17,18 +17,15 @@ var cli = commandLineArgs([
 var combine = function (options) {
   var write = function (results) {
     if (options.output) {
-      fs.writeFile(path.join(process.cwd(), options.output), results, function (err) {
-        if (err) {
-          throw err;
-        }
-      });
+      var file = fs.createWriteStream(path.join(process.cwd(), options.output));
+      results.pipe(file);
     } else {
-      process.stdout.write(results);
+      results.pipe(process.stdout);
     }
   };
 
   var exec = function (patterns) {
-    globcat(patterns, {}, function (err, results) {
+    globcat(patterns, { stream: true }, function (err, results) {
       if (err) {
         throw err;
       } else {
