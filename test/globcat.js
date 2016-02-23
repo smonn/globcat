@@ -28,4 +28,12 @@ describe('globcat', function() {
       done();
     });
   });
+
+  it('should fail when matching directory', function(done) {
+    globcat('*', {}, function(err, results) {
+      assert.isOk(err, 'error should be thrown, cannot stream directories');
+      assert.isNotOk(results, 'should have empty results');
+      done();
+    });
+  });
 });
