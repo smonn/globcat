@@ -1,35 +1,35 @@
 'use strict';
 
-var glob = require('glob');
-var async = require('async');
-var _ = require('ramda');
-var combined = require('combined-stream2');
-var fs = require('fs');
+const glob = require('glob');
+const async = require('async');
+const _ = require('ramda');
+const combined = require('combined-stream2');
+const fs = require('fs');
 
-var handler = _.curry(function(options, pattern, callback) {
+const handler = _.curry(function(options, pattern, callback) {
   glob(pattern, options.glob || {}, callback);
 });
 
-var createStream = function(path, callback) {
+const createStream = function(path, callback) {
   callback(null, fs.createReadStream(path));
 };
 
-var combineStreams = function(callback) {
-  var failed = false;
+const combineStreams = function(callback) {
+  let failed = false;
 
   return function(err, streams) {
-    var stream;
+    let stream;
 
     if (err) {
       callback(err);
     } else {
       stream = combined.create();
-      _.forEach(function(s) {
+      _.forEach((s) => {
         if (failed) {
           return;
         }
 
-        s.on('error', function(err) {
+        s.on('error', (err) => {
           failed = true;
           callback(err);
         });
@@ -47,29 +47,29 @@ var combineStreams = function(callback) {
 };
 
 var combineToString = function(callback) {
-  return combineStreams(function(err, stream) {
-    var str = '';
+  return combineStreams((err, stream) => {
+    let str = '';
 
     if (err) {
       callback(err);
       return;
     }
 
-    stream.on('data', function(buffer) {
+    stream.on('data', (buffer) => {
       str += buffer.toString();
     });
 
-    stream.on('error', function(err) {
+    stream.on('error', (err) => {
       callback(err);
     });
 
-    stream.on('end', function() {
+    stream.on('end', () => {
       callback(null, str);
     });
   });
 };
 
-var once = function(fn) {
+const once = function(fn) {
   return function() {
     if (fn === null) {
       return;
@@ -79,13 +79,13 @@ var once = function(fn) {
   };
 };
 
-var globcat = function(patterns, options, callback) {
-  options = options || { glob: {}, stream: false };
+const globcat = function(patterns, options, callback) {
+  options = options || {glob: {}, stream: false};
   patterns = Array.isArray(patterns) ? patterns : [patterns];
   callback = once(callback);
 
-  async.map(patterns, handler(options), function(err, results) {
-    var paths = _.uniq(_.flatten(results));
+  async.map(patterns, handler(options), (err, results) => {
+    const paths = _.uniq(_.flatten(results));
 
     if (err) {
       callback(err);
