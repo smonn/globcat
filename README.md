@@ -51,6 +51,11 @@ cat file-with-paths.txt | globcat > combined.txt
 
 # Changelog
 
+## 0.3.0
+
+- Switched to ES6 code style
+- Upgraded package dependencies
+
 ## 0.2.3
 
 - Added error handling when trying to stream directory.
