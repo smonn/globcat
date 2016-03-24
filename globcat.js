@@ -46,7 +46,7 @@ const combineStreams = function(callback) {
   };
 };
 
-var combineToString = function(callback) {
+const combineToString = function(callback) {
   return combineStreams((err, stream) => {
     let str = '';
 
