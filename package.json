@@ -17,7 +17,7 @@
     "globcat": "bin/globcat.js"
   },
   "dependencies": {
-    "async": "^2.0.0-rc.1",
+    "async": "^2.0.0-rc.2",
     "combined-stream2": "^1.1.2",
     "command-line-args": "^2.1.6",
     "glob": "^7.0.3",
