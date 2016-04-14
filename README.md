@@ -51,15 +51,19 @@ cat file-with-paths.txt | globcat > combined.txt
 
 # Changelog
 
+## 0.4.0
+
+- Updated package dependencies.
+
 ## 0.3.1
 
-- Minor refactoring of command line code
-- Upgraded async dependency
+- Minor refactoring of command line code.
+- Updated async dependency.
 
 ## 0.3.0
 
-- Switched to ES6 code style
-- Upgraded package dependencies
+- Switched to ES6 code style.
+- Updated package dependencies.
 
 ## 0.2.3
 
@@ -81,4 +85,4 @@ cat file-with-paths.txt | globcat > combined.txt
 
 ## 0.1.6
 
-- Updated dependencies.
+- Updated package dependencies.
