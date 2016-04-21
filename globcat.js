@@ -2,98 +2,142 @@
 
 const glob = require('glob');
 const async = require('async');
-const _ = require('ramda');
-const combined = require('combined-stream2');
 const fs = require('fs');
+const combined = require('combined-stream2');
+const _ = require('lodash/fp');
 
-const handler = _.curry(function(options, pattern, callback) {
-  glob(pattern, options.glob || {}, callback);
-});
-
-const createStream = function(path, callback) {
-  callback(null, fs.createReadStream(path));
+const _defaults = {
+  glob: {},
+  stream: false,
 };
 
-const combineStreams = function(callback) {
-  let failed = false;
+const _once = function(fn) {
+  let value;
+  let called = false;
+  return function() {
+    if (called) {
+      return value;
+    }
 
-  return function(err, streams) {
-    let stream;
+    value = fn.apply(this, arguments);
+    called = true;
 
-    if (err) {
-      callback(err);
-    } else {
-      stream = combined.create();
-      _.forEach((s) => {
-        if (failed) {
+    return value;
+  };
+};
+
+const _promiseGlob = function(patterns, options) {
+  patterns = Array.isArray(patterns) ? patterns : [patterns];
+  return new Promise((resolve, reject) => {
+    async.map(patterns, function(pattern, done) {
+      glob(pattern, options, done);
+    }, function(err, results) {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(_.uniq(_.flatten(results)));
+      }
+    });
+  });
+};
+
+const _createStream = function(files) {
+  return new Promise((resolve, reject) => {
+    async.map(files, (file, done) => {
+      let callback = _once(done);
+
+      fs.stat(file, (err, stats) => {
+        if (err) {
+          callback(err);
           return;
         }
 
-        s.on('error', (err) => {
-          failed = true;
-          callback(err);
-        });
+        if (stats.isFile()) {
+          let stream = fs.createReadStream(file);
 
-        stream.append(s);
-      }, streams);
+          stream.on('open', () => {
+            callback(null, stream);
+          });
 
-      if (failed) {
+          stream.on('error', (err) => {
+            callback(err);
+          });
+        } else {
+          callback(new Error('Not a file: ' + file));
+        }
+      });
+    }, (err, streams) => {
+      if (err) {
+        reject(err);
         return;
       }
 
-      callback(null, stream);
-    }
-  };
-};
+      let stream = streams.reduce((combinedStream, fileStream) => {
+        combinedStream.append(fileStream);
+        return combinedStream;
+      }, combined.create());
 
-const combineToString = function(callback) {
-  return combineStreams((err, stream) => {
-    let str = '';
-
-    if (err) {
-      callback(err);
-      return;
-    }
-
-    stream.on('data', (buffer) => {
-      str += buffer.toString();
-    });
-
-    stream.on('error', (err) => {
-      callback(err);
-    });
-
-    stream.on('end', () => {
-      callback(null, str);
+      resolve(stream);
     });
   });
 };
 
-const once = function(fn) {
-  return function() {
-    if (fn === null) {
-      return;
+const _toString = function(asStream) {
+  return function(stream) {
+    if (asStream) {
+      return stream;
     }
-    fn.apply(this, arguments);
-    fn = null;
+
+    return new Promise((resolve, reject) => {
+      let str = '';
+
+      stream.on('data', (buffer) => {
+        str += buffer;
+      });
+
+      stream.on('error', (err) => {
+        reject(err);
+      });
+
+      stream.on('end', () => {
+        resolve(str);
+      });
+    });
   };
 };
 
-const globcat = function(patterns, options, callback) {
-  options = options || {glob: {}, stream: false};
-  patterns = Array.isArray(patterns) ? patterns : [patterns];
-  callback = once(callback);
+/**
+ * Find files using glob pattern(s) get a string or stream of
+ * the combined files' content.
+ * @param {String|String[]} patterns - One or more glob patterns.
+ * @param {Object} [options] - Options object. Optional.
+ * @param {Boolean} [options.stream=false] - Get results as a stream. Optional.
+ * @param {Object} [options.glob={}] - Options to send to glob.
+ * @param {Function} [callback]
+ * @returns {Promise} Returns a promise if no callback is provided.
+ * @see {@link https://www.npmjs.com/package/glob}
+ */
+module.exports = function(patterns, options, callback) {
+  let settings = _.defaultsDeep(_defaults, options);
+  let promise = _promiseGlob(patterns, settings.glob)
+    .then(_createStream)
+    .then(_toString(settings.stream))
+    .then((result) => {
+      if (callback) {
+        callback(null, result);
+      } else {
+        return result;
+      }
+    })
+    .catch((err) => {
+      if (callback) {
+        callback(err);
+      } else {
+        throw err;
+      }
+    });
 
-  async.map(patterns, handler(options), (err, results) => {
-    const paths = _.uniq(_.flatten(results));
-
-    if (err) {
-      callback(err);
-    } else {
-      async.map(paths, createStream,
-        options.stream ? combineStreams(callback) : combineToString(callback));
-    }
-  });
+  if (!callback) {
+    return promise;
+  }
 };
-
-module.exports = globcat;

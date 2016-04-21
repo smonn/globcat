@@ -11,7 +11,9 @@
   ],
   "main": "globcat.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "preversion": "npm test && gulp lint && gulp cs",
+    "postversion": "git push && git push --tags"
   },
   "bin": {
     "globcat": "bin/globcat.js"
@@ -21,17 +23,17 @@
     "combined-stream2": "^1.1.2",
     "command-line-args": "^2.1.6",
     "glob": "^7.0.3",
-    "lodash": "^4.11.1",
-    "ramda": "^0.21.0"
+    "lodash": "^4.11.1"
   },
   "devDependencies": {
     "chai": "^3.5.0",
     "gulp": "^3.9.1",
+    "gulp-eslint": "^2.0.0",
     "gulp-jscs": "^3.0.2",
     "gulp-jshint": "^2.0.0",
     "gulp-mocha": "^2.2.0",
     "is-stream": "^1.1.0",
-    "jshint": "^2.9.1",
+    "jshint": "^2.9.2",
     "jshint-stylish": "^2.1.0",
     "lodash": "^4.11.1",
     "mocha": "^2.4.5"
@@ -43,6 +45,10 @@
     "type": "git",
     "url": "git+ssh://git@github.com/smonn/globcat.git"
   },
+  "files": [
+    "bin/globcat.js",
+    "globcat.js"
+  ],
   "homepage": "https://github.com/smonn/globcat#readme",
   "author": "Simon Ingeson <simon.ingeson@gmail.com> (http://www.ingeson.se/)",
   "license": "MIT"

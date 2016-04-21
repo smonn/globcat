@@ -2,19 +2,31 @@
 
 const gulp = require('gulp');
 const jscs = require('gulp-jscs');
-const jshint = require('gulp-jshint');
+const eslint = require('gulp-eslint');
 const mocha = require('gulp-mocha');
 
 const src = ['globcat.js', 'test/**/*.js', 'bin/**/*.js'];
 
-gulp.task('default', function() {
+gulp.task('test', function() {
+  return gulp.src(src[1])
+    .pipe(mocha());
+});
+
+gulp.task('lint', function() {
+  return gulp.src(src)
+    .pipe(eslint())
+    .pipe(eslint.format())
+    .pipe(eslint.failAfterError());
+});
+
+gulp.task('cs', function() {
   return gulp.src(src)
     .pipe(jscs())
-    .pipe(jscs.reporter())
-    .pipe(jshint('.jshintrc'))
-    .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(jshint.reporter('fail'))
-    .pipe(mocha())
-    .once('error', () => process.exit(1))
-    .once('end', () => process.exit());
+    .pipe(jscs.reporter());
 });
+
+gulp.task('watch', function() {
+  return gulp.watch(src, ['default']);
+});
+
+gulp.task('default', ['test', 'lint', 'cs']);
