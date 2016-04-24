@@ -4,26 +4,11 @@ const glob = require('glob');
 const async = require('async');
 const fs = require('fs');
 const combined = require('combined-stream2');
-const _ = require('lodash/fp');
+const func = require('./func');
 
 const _defaults = {
   glob: {},
   stream: false,
-};
-
-const _once = function(fn) {
-  let value;
-  let called = false;
-  return function() {
-    if (called) {
-      return value;
-    }
-
-    value = fn.apply(this, arguments);
-    called = true;
-
-    return value;
-  };
 };
 
 const _promiseGlob = function(patterns, options) {
@@ -35,7 +20,7 @@ const _promiseGlob = function(patterns, options) {
       if (err) {
         reject(err);
       } else {
-        resolve(_.uniq(_.flatten(results)));
+        resolve(func.uniq(func.flatten(results)));
       }
     });
   });
@@ -44,7 +29,7 @@ const _promiseGlob = function(patterns, options) {
 const _createStream = function(files) {
   return new Promise((resolve, reject) => {
     async.map(files, (file, done) => {
-      let callback = _once(done);
+      let callback = func.once(done);
 
       fs.stat(file, (err, stats) => {
         if (err) {
@@ -118,7 +103,7 @@ const _toString = function(asStream) {
  * @see {@link https://www.npmjs.com/package/glob}
  */
 module.exports = function(patterns, options, callback) {
-  let settings = _.defaultsDeep(_defaults, options);
+  let settings = func.defaults(_defaults, options);
   let promise = _promiseGlob(patterns, settings.glob)
     .then(_createStream)
     .then(_toString(settings.stream))

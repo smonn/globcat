@@ -60,6 +60,12 @@ cat file-with-paths.txt | globcat > combined.txt
 
 # Changelog
 
+## 0.4.1
+
+- Removed dependency on lodash.
+- Simplified testing and linting to npm scripts (i.e. no longer using
+  Gulp).
+
 ## 0.4.0
 
 - Updated package dependencies.

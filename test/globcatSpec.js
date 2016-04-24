@@ -7,7 +7,7 @@ const path = require('path');
 const isStream = require('is-stream');
 
 describe('globcat', function() {
-  it('should include each file only once', function(done) {
+  it('includes each file only once', function(done) {
     const cwd = process.cwd();
     const pattern = path.join(cwd, 'test/**/*.txt');
     const duplicate = path.join(cwd, 'test/sample/foo.txt');
@@ -19,7 +19,7 @@ describe('globcat', function() {
       });
   });
 
-  it('should stream file content', function(done) {
+  it('streams file content', function(done) {
     const cwd = process.cwd();
     const pattern = path.join(cwd, 'test/**/*.txt');
 
@@ -30,7 +30,7 @@ describe('globcat', function() {
       });
   });
 
-  it('should fail when matching directory', function(done) {
+  it('fails when matching directory', function(done) {
     return globcat('*')
       .catch((err) => {
         assert.match(err.message, /^not a file/i);
@@ -38,7 +38,7 @@ describe('globcat', function() {
       });
   });
 
-  it('should allow callback', function(done) {
+  it('allows callback', function(done) {
     const cwd = process.cwd();
     const pattern = path.join(cwd, 'test/**/*.txt');
 
