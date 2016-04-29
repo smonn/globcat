@@ -1,26 +1,24 @@
-'use strict';
+'use strict'
 
-const typeOf = require('./typeof');
+const typeOf = require('./typeof')
 
-const flatten = function(enumerable) {
-  let result = [];
+module.exports = function flatten (enumerable) {
+  let result = []
 
   if (typeOf(enumerable) === 'array') {
-    result = enumerable.reduce(function(list, item) {
+    result = enumerable.reduce((list, item) => {
       if (typeOf(item) === 'array') {
-        let inner = flatten(item);
-        list.push(...inner);
+        let inner = flatten(item)
+        list.push(...inner)
       } else {
-        list.push(item);
+        list.push(item)
       }
 
-      return list;
-    }, result);
+      return list
+    }, result)
   } else {
-    result.push(enumerable);
+    result.push(enumerable)
   }
 
-  return result;
-};
-
-module.exports = flatten;
+  return result
+}

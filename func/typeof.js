@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-module.exports = function(x) {
-  let firstMatch = 1;
-  let regexp = /^\[object (.*)\]$/;
+module.exports = function (x) {
+  const firstMatch = 1
+  const regexp = /^\[object (.*)\]$/
   return Object.prototype.toString.call(x)
-    .match(regexp)[firstMatch]
-    .toLowerCase();
-};
+    .match(regexp)[ firstMatch ]
+    .toLowerCase()
+}

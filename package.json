@@ -11,14 +11,14 @@
   ],
   "main": "globcat.js",
   "scripts": {
-    "lint": "eslint globcat.js test/*Spec.js func/*.js",
-    "precodestyle": "npm run lint",
-    "codestyle": "jscs globcat.js test/*Spec.js func/*.js",
-    "pretest": "npm run codestyle",
-    "test": "mocha --harmony",
+    "prelint": "echo '===== lint'",
+    "lint": "standard",
+    "pretest": "npm run lint && echo '===== test'",
+    "test": "tape 'test/**/*Spec.js' | tap-spec",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
-    "watch": "onchange globcat.js test/*Spec.js func/*.js -- npm test"
+    "prewatch": "npm install --silent",
+    "watch": "onchange globcat.js test/*Spec.js lib/*.js func/*.js -i -w -- npm test"
   },
   "bin": {
     "globcat": "bin/globcat.js"
@@ -30,12 +30,11 @@
     "glob": "^7.0.3"
   },
   "devDependencies": {
-    "chai": "^3.5.0",
-    "eslint": "^2.8.0",
     "is-stream": "^1.1.0",
-    "jscs": "^3.0.3",
-    "mocha": "^2.4.5",
-    "onchange": "^2.4.0"
+    "onchange": "^2.4.0",
+    "standard": "^6.0.8",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.5.1"
   },
   "bugs": {
     "url": "https://github.com/smonn/globcat/issues"

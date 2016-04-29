@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
-module.exports = function(fn) {
-  let value;
-  let called = false;
+module.exports = function (fn) {
+  let value
+  let called = false
 
-  return function() {
+  return function () {
     if (called) {
-      return value;
+      return value
     }
 
-    value = fn(...arguments);
-    called = true;
+    value = fn(...arguments)
+    called = true
 
-    return value;
-  };
-};
+    return value
+  }
+}
