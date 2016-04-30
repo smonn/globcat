@@ -4,3 +4,9 @@ node_modules
 
 # webstorm and other jetbrains products
 .idea
+
+# sublime
+*.sublime-*
+
+# logs
+*.log
