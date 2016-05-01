@@ -18,7 +18,7 @@
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
     "prewatch": "npm install --silent",
-    "watch": "onchange globcat.js test/*Spec.js lib/*.js func/*.js -i -w -- npm test"
+    "watch": "onchange globcat.js test/**/*Test.js lib/*.js func/*.js -i -w -- npm test"
   },
   "bin": {
     "globcat": "bin/globcat.js"
