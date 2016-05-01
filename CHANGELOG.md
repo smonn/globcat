@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.5.1
+
+- Allow second argument to be callback.
+- Adding basic integration test for command line code.
+- Various comments and code cleanup.
+
 ## 0.5.0
 
 - Node v6.0.0.
