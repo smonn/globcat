@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.5.2
+
+- Fix missing folder in package.json.
+
 ## 0.5.1
 
 - Allow second argument to be callback.

@@ -46,6 +46,7 @@
   "files": [
     "bin/globcat.js",
     "func",
+    "lib",
     "globcat.js"
   ],
   "homepage": "https://github.com/smonn/globcat#readme",
