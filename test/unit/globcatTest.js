@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('tape')
-const globcat = require('../globcat')
+const globcat = require('../../globcat')
 const path = require('path')
 const isStream = require('is-stream')
 
@@ -37,7 +37,8 @@ test('globcat streams file content', (assert) => {
 })
 
 test('globcat fails when matching directory', (assert) => {
-  const directory = path.join(__dirname, 'sample')
+  const cwd = process.cwd()
+  const directory = path.join(cwd, 'test/sample')
   return globcat(directory)
     .then(() => {
       assert.fail('should not be successful')
