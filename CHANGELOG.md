@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.5.2
+## 0.6.0
 
 - Fix missing folder in package.json.
 
