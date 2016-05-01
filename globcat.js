@@ -22,6 +22,11 @@ const _defaults = {
  * @see {@link https://www.npmjs.com/package/glob}
  */
 module.exports = function (patterns, options, callback) {
+  if (func.typeOf(options) === 'function') {
+    callback = options
+    options = {}
+  }
+
   let settings = func.defaults(_defaults, options)
   let promise = glob(patterns, settings.glob)
     .then(filesToStream)
