@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('tape')
-const globcat = require('../../globcat')
+const globcat = require('../../dist/globcat')
 const path = require('path')
 const isStream = require('is-stream')
 
