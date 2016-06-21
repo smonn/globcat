@@ -1,3 +1,10 @@
+[![Travis](https://img.shields.io/travis/smonn/globcat.svg)](https://travis-ci.org/smonn/globcat)
+[![Dependency Status](https://david-dm.org/smonn/globcat.svg)](https://david-dm.org/smonn/globcat)
+[![npm module downloads](http://img.shields.io/npm/dt/globcat.svg)](https://www.npmjs.org/package/globcat)
+[![npm license](https://img.shields.io/npm/l/globcat.svg)](https://raw.githubusercontent.com/smonn/globcat/master/LICENSE)
+[![GitHub issues](https://img.shields.io/github/issues/smonn/globcat.svg)](https://github.com/smonn/globcat/issues)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
+
 # globcat
 
 Concatenate files from command line with glob pattern.
@@ -12,6 +19,7 @@ npm install [-g] globcat
 
 ```javascript
 const globcat = require('globcat')
+const options = { /*...*/ }
 
 // just the one...
 globcat('**/*.txt', (err, contents) => {

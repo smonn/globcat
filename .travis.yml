@@ -1,0 +1,20 @@
+deploy:
+  provider: npm
+  email: simon.ingeson@gmail.com
+  api_key:
+    secure: hVMyTrfOmX3anYDmOnOU9NuNnZ5axlNVlxzOInT4bAdkWzX2WBU7gHMpUToQkwJ9wMIo48G9/Gy8WOPLNzKFulSsx4o1cO0vhClRVSu8Qdd4FZ7IeLt8SwqTPWdW/RBdSD/e42aBci64E9Jyc4If1UnTjlPWKc8beDdmsOjyyeK364obozMfVZAaR5/In0GWUSBiwvaU3DcPWEoZ8rAUQbFLs1oMPjU/Q6qlmuG/bed4780Uyvg69SvuOidI0E5/Lm2DivdLaMkyHlBwpcqCPflLo8D5DXE3y7IOI793bpCVxtAAn7/wlaMi4ZWJeEffiOJcQ+PZwbz4VxyWRZXd9d/g20tMftxzszaU6eGU163qc6TP0Ftmzv2eSTwZcsErXgqy49nv8kN70TCnDH+8jbI8qNtScT53ySuUimSIr3Z64vwbwOzdYRdA5gQ9l4E3SVFBYNrUgNy7dqn0p/f4WDFZlzhGEWjslNlsMPxjrl9/kKC4wwmHswy6+gDwKB+JMMpu/4O6b+uzYAi37yv+awVW3sD+g8phif9EumvDmXejORovgubxzjanYY/5Lgq3LdMhs2xVhMu4GRMtCxnLe5gzUmK2ZYQp9swx9rFMUoFpzqjk5diANDLnsDEws+E2LviALkaPIqCeGCBA4Cj46XhfBYYeU6sKYwTXELx6SyE=
+  on:
+    tags: true
+    repo: smonn/globcat
+language: node_js
+node_js:
+  - "node"
+  - "6"
+  - "6.1"
+  - "6.0"
+  - "5"
+  - "5.11"
+  - "5.10"
+  - "4"
+  - "4.4"
+  - "4.3"

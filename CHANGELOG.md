@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0
+
+- Updated package dependencies.
+- Adapted to work with breaking changes in [command-line-args][cla] v3.0.0
+  and the release of [command-line-usage][clu].
+- Improved test code coverage using [istanbul][istanbul] and removed unused
+  code.
+- Added [Travis CI build][travis].
+- Removed `dist` folder from source control.
+
 ## 0.7.0
 
 - Making it work in Node.js pre-v6.0.0 using babel to build code.
@@ -17,9 +27,9 @@
 ## 0.5.0
 
 - Node v6.0.0.
-- Switched to [http://standardjs.com/](http://standardjs.com/) for
+- Switched to [http://standardjs.com/][standard] for
   code style and linting.
-- Switched to [tape](https://www.npmjs.com/package/tape) for tests.
+- Switched to [tape][tape] for tests.
 - Code refactoring and cleanup.
 
 ## 0.4.1
@@ -65,3 +75,10 @@
 ## 0.1.6
 
 - Updated package dependencies.
+
+[istanbul]: https://www.npmjs.com/package/istanbul
+[standard]: http://standardjs.com/
+[tape]: https://www.npmjs.com/package/tape
+[cla]: https://www.npmjs.com/package/command-line-args
+[clu]: https://www.npmjs.com/package/command-line-usage
+[travis]: https://travis-ci.org/smonn/globcat

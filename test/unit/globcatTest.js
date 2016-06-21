@@ -71,3 +71,12 @@ test('globcat allows second argument to be callback', (assert) => {
     assert.end()
   })
 })
+
+test('globcat yields errors when using callback', (assert) => {
+  const cwd = process.cwd()
+  const directory = path.join(cwd, 'test/sample')
+  globcat(directory, (err) => {
+    assert.equal(err.message, `Not a file: ${directory}`, 'should be a useful error message')
+    assert.end()
+  })
+})

@@ -1,6 +1,5 @@
 'use strict'
 
-const curry = require('./curry')
 const once = require('./once')
 const defaults = require('./defaults')
 const typeOf = require('./typeof')
@@ -8,15 +7,6 @@ const flatten = require('./flatten')
 const unique = require('./unique')
 
 module.exports = {
-  /**
-   * Creates a curried function.
-   * @function
-   * @param {Function} fn - Function to curry.
-   * @param {Number} [arity=fn.length] - Number of arguments.
-   * @returns {Function} The curried function.
-   */
-  curry,
-
   /**
    * Copies all the keys and values from each argument into a new object. It will overwrite values
    * with the same key from separate objects from left to right, meaning the final argument take
