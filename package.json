@@ -28,10 +28,10 @@
     "globcat": "dist/bin/globcat.js"
   },
   "dependencies": {
-    "async": "^2.0.0-rc.6",
+    "async": "^2.0.0",
     "combined-stream2": "^1.1.2",
     "command-line-args": "^3.0.0",
-    "command-line-usage": "^3.0.1",
+    "command-line-usage": "^3.0.3",
     "glob": "^7.0.5",
     "onchange": "^2.5.0"
   },
