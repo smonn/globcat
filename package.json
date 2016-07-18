@@ -1,6 +1,6 @@
 {
   "name": "globcat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Concatenate files from command line with glob pattern.",
   "keywords": [
     "glob",
