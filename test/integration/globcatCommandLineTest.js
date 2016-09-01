@@ -12,7 +12,7 @@ test('command line', (assert) => {
   exec(command, (err, stdout, stderr) => {
     assert.error(err, 'no errors')
     assert.equal(stderr, '', 'should not have error output')
-    assert.equal(stdout, 'bar\nbaz\nfoo\n', 'should equal file contents')
+    assert.ok(/bar\s+baz\s+foo\s+/.test(stdout), 'should equal file contents')
     assert.end()
   })
 })
