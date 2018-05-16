@@ -1,5 +1,3 @@
-'use strict'
-
 const glob = require('./lib/globPromise')
 const func = require('./func')
 const filesToStream = require('./lib/filesToStream')
@@ -21,14 +19,14 @@ const _defaults = {
  * @returns {Promise} Returns a promise if no callback is provided.
  * @see {@link https://www.npmjs.com/package/glob}
  */
-module.exports = function (patterns, options, callback) {
+module.exports = function(patterns, options, callback) {
   if (func.typeOf(options) === 'function') {
     callback = options
     options = {}
   }
 
-  let settings = func.defaults(_defaults, options)
-  let promise = glob(patterns, settings.glob)
+  const settings = func.defaults(_defaults, options)
+  const promise = glob(patterns, settings.glob)
     .then(filesToStream)
     .then((stream) => {
       if (settings.stream) {

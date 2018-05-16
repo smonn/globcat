@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.1.1
+
+- Switched from standard to prettier.
+
 ## 1.0.5
 
 - Updated build setup.

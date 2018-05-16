@@ -1,5 +1,3 @@
-'use strict'
-
 const once = require('./once')
 const defaults = require('./defaults')
 const typeOf = require('./typeof')

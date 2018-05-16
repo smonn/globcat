@@ -1,5 +1,3 @@
-'use strict'
-
 const test = require('tape')
 const func = require('../../dist/func')
 
@@ -32,28 +30,40 @@ test('func.once calls function only once', (assert) => {
 
 test('func.flatten flattens nested arrays', (assert) => {
   const numbers = { one: 1, two: 2, three: 3 }
-  const array = [ numbers.one, [ numbers.two, [ numbers.three ] ] ]
-  const expected = [ numbers.one, numbers.two, numbers.three ]
-  assert.deepEqual(func.flatten(array), expected, 'should have the same array values')
+  const array = [numbers.one, [numbers.two, [numbers.three]]]
+  const expected = [numbers.one, numbers.two, numbers.three]
+  assert.deepEqual(
+    func.flatten(array),
+    expected,
+    'should have the same array values'
+  )
   assert.end()
 })
 
 test('func.flatten yields array when argument is not', (assert) => {
   const value = 1
-  const expected = [ value ]
-  assert.deepEqual(func.flatten(value), expected, 'should have the same array values')
+  const expected = [value]
+  assert.deepEqual(
+    func.flatten(value),
+    expected,
+    'should have the same array values'
+  )
   assert.end()
 })
 
 test('func.unique filters out duplicate values', (assert) => {
-  const list = [ 'foo', 'bar', 'baz', 'foo' ]
-  const expected = [ 'foo', 'bar', 'baz' ]
-  assert.deepEqual(func.unique(list), expected, 'should only contain once of each value')
+  const list = ['foo', 'bar', 'baz', 'foo']
+  const expected = ['foo', 'bar', 'baz']
+  assert.deepEqual(
+    func.unique(list),
+    expected,
+    'should only contain once of each value'
+  )
   assert.end()
 })
 
 test('func.typeOf prints correct type', (assert) => {
-  const id = function (x) {
+  const id = function(x) {
     return x
   }
 
@@ -61,7 +71,11 @@ test('func.typeOf prints correct type', (assert) => {
   assert.equal(func.typeOf({}), 'object', 'object should be object')
   assert.equal(func.typeOf([]), 'array', 'array should be array')
   assert.equal(func.typeOf(NaN), 'number', 'number should be number')
-  assert.equal(func.typeOf(/abc/), 'regexp', 'regular expression should be regexp')
+  assert.equal(
+    func.typeOf(/abc/),
+    'regexp',
+    'regular expression should be regexp'
+  )
   assert.equal(func.typeOf(true), 'boolean', 'boolean should be boolean')
   assert.equal(func.typeOf(Math), 'math', 'math object should be math')
   assert.equal(func.typeOf(new Date()), 'date', 'date instance should be date')
