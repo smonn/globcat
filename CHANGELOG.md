@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.2
+
+- Updated package dependencies.
+- Now using Babel 7.
+
 ## 1.1.1
 
 - Switched from standard to prettier.
