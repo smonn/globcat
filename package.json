@@ -11,8 +11,6 @@
   ],
   "main": "dist/globcat.js",
   "scripts": {
-    "precoverage": "npm run build && echo ===== coverage",
-    "coverage": "tap --coverage \"test/**/*Test.js\"",
     "prelint": "echo ===== lint",
     "lint": "eslint . --fix",
     "prebuild": "npm run lint && echo ===== build",
