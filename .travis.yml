@@ -15,7 +15,7 @@ deploy:
   email: smonnsource@gmail.com
   skip_cleanup: true
   api_key:
-    secure: BDXQDdV8ft6JGoZe0ZL599QI4WnMl/lq009ky/d04JM60CgefOTHNtV9uVK4+Mo0nkShKJm1b7FdKNXetpacAB4ETsaro59DHYxg9xC7QFXatAeR8V51ThfGNwWnm21z6m9+cHjXOzFQv05JD546pzTelDIW5h8zWd6on8oPAj6E5pFBqeSPJyg1eqsMe4PjIiNjTB1i+HLRiuYfEAGxakvnNf4cXcqA6AyV4RuyOABUBloALqXAAAnXtcYojT43B1Idc7ZNE801PqICJ2BBqCzOv4PO7HrQG7rtFZqhQKlwyT7dY8GRAUr1Z6jdTXKmO77da+y2BczDtiwejp0xk37xBmIAT1Y3m2XqSNA6z4gAWl2K7CG4zN3IenC6rv+9+65iN5qSdp4z5UcqLaDuZauGcBGTBtiO8JzebYpnEXboZCOxvrQ3cs849O+9lcJZjWkCaqx8vIE1YUi4RuqZ2r6186IPfhqOeALv30+3J0VhCJTzwAS1U3C3rrUlZyp855HnsLb8gFBxsd5Pzsbu207Da5uljv62T2FlwBgkH1BsrKXCxVvqS6CzN9s3GRi9JP0jakCe6Lp9Ptg5S2cOo0S6D/W9hk5mFeAlxQpBeal+ndIJQuLDUg65k4e4X1BfiqJIa6AkXM5/WU1ERnqJLVjBH0F/wt288YmRBm9cFsg=
+    secure: $NPM_AUTH_TOKEN
   on:
     tags: true
     repo: smonn/globcat
