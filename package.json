@@ -14,7 +14,7 @@
     "prelint": "echo '===== lint'",
     "lint": "standard",
     "pretest": "npm run lint && echo '===== test'",
-    "test": "tape 'test/**/*Spec.js' | tap-spec",
+    "test": "tape 'test/**/*Test.js' | tap-spec",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
     "prewatch": "npm install --silent",
