@@ -10,14 +10,6 @@ cache:
   directories:
     - "node_modules"
 
-install:
-  - npm install --global codecov
-  - npm install
-
-script:
-  - npm run coverage
-  - codecov
-
 deploy:
   provider: npm
   email: smonnsource@gmail.com
