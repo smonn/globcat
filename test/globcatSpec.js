@@ -12,7 +12,7 @@ test('globcat includes each file only once', (assert) => {
 
   return globcat([ pattern, duplicate ])
     .then((content) => {
-      assert.equal(content, 'bar\nbaz\nfoo\n')
+      assert.equal(content, 'bar\nbaz\nfoo\n', 'should equal file contents')
       assert.end()
     })
     .catch((err) => {
@@ -27,7 +27,7 @@ test('globcat streams file content', (assert) => {
 
   return globcat(pattern, { stream: true })
     .then((stream) => {
-      assert.equal(isStream.readable(stream), true)
+      assert.equal(isStream.readable(stream), true, 'should be a readable stream')
       assert.end()
     })
     .catch((err) => {
@@ -44,7 +44,7 @@ test('globcat fails when matching directory', (assert) => {
       assert.end()
     })
     .catch((err) => {
-      assert.equal(err.message, `Not a file: ${directory}`)
+      assert.equal(err.message, `Not a file: ${directory}`, 'should be a useful error message')
       assert.end()
     })
 })
@@ -55,7 +55,7 @@ test('globcat allows callback', (assert) => {
 
   globcat(pattern, {}, (err, content) => {
     assert.error(err, 'no errors')
-    assert.equal(content, 'bar\nbaz\nfoo\n')
+    assert.equal(content, 'bar\nbaz\nfoo\n', 'should equal file contents')
     assert.end()
   })
 })
