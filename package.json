@@ -11,9 +11,14 @@
   ],
   "main": "globcat.js",
   "scripts": {
-    "test": "mocha",
-    "preversion": "npm test && gulp lint && gulp cs",
-    "postversion": "git push && git push --tags"
+    "lint": "eslint globcat.js test/*Spec.js func/*.js",
+    "precodestyle": "npm run lint",
+    "codestyle": "jscs globcat.js test/*Spec.js func/*.js",
+    "pretest": "npm run codestyle",
+    "test": "mocha --harmony",
+    "preversion": "npm test",
+    "postversion": "git push && git push --tags",
+    "watch": "onchange globcat.js test/*Spec.js func/*.js -- npm test"
   },
   "bin": {
     "globcat": "bin/globcat.js"
@@ -22,21 +27,15 @@
     "async": "^2.0.0-rc.3",
     "combined-stream2": "^1.1.2",
     "command-line-args": "^2.1.6",
-    "glob": "^7.0.3",
-    "lodash": "^4.11.1"
+    "glob": "^7.0.3"
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "gulp": "^3.9.1",
-    "gulp-eslint": "^2.0.0",
-    "gulp-jscs": "^3.0.2",
-    "gulp-jshint": "^2.0.0",
-    "gulp-mocha": "^2.2.0",
+    "eslint": "^2.8.0",
     "is-stream": "^1.1.0",
-    "jshint": "^2.9.2",
-    "jshint-stylish": "^2.1.0",
-    "lodash": "^4.11.1",
-    "mocha": "^2.4.5"
+    "jscs": "^3.0.3",
+    "mocha": "^2.4.5",
+    "onchange": "^2.4.0"
   },
   "bugs": {
     "url": "https://github.com/smonn/globcat/issues"
