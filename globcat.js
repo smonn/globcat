@@ -15,6 +15,8 @@ var createStream = function(path, callback) {
 };
 
 var combineStreams = function(callback) {
+  var failed = false;
+
   return function(err, streams) {
     var stream;
 
@@ -22,7 +24,23 @@ var combineStreams = function(callback) {
       callback(err);
     } else {
       stream = combined.create();
-      _.forEach(stream.append.bind(stream), streams);
+      _.forEach(function(s) {
+        if (failed) {
+          return;
+        }
+
+        s.on('error', function(err) {
+          failed = true;
+          callback(err);
+        });
+
+        stream.append(s);
+      }, streams);
+
+      if (failed) {
+        return;
+      }
+
       callback(null, stream);
     }
   };
@@ -51,9 +69,20 @@ var combineToString = function(callback) {
   });
 };
 
+var once = function(fn) {
+  return function() {
+    if (fn === null) {
+      return;
+    }
+    fn.apply(this, arguments);
+    fn = null;
+  };
+};
+
 var globcat = function(patterns, options, callback) {
   options = options || { glob: {}, stream: false };
   patterns = Array.isArray(patterns) ? patterns : [patterns];
+  callback = once(callback);
 
   async.map(patterns, handler(options), function(err, results) {
     var paths = _.uniq(_.flatten(results));

@@ -51,6 +51,10 @@ cat file-with-paths.txt | globcat > combined.txt
 
 # Changelog
 
+## 0.2.3
+
+- Added error handling when trying to stream directory.
+
 ## 0.2.2
 
 - Applied JSCS and JSHint through Gulp.
