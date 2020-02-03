@@ -13,7 +13,14 @@ npm install [-g] globcat
 ```javascript
 var globcat = require("globcat");
 
+// just the one...
 globcat("**/*.txt", options, function (err, contents) {
+  // contents contains the file contents of the matched files
+  // err is an error object or null
+});
+
+// ... or with array
+globcat(["path/to/file.txt", "other/path/*.txt"], options, function (err, contents) {
   // contents contains the file contents of the matched files
   // err is an error object or null
 });
@@ -22,7 +29,7 @@ globcat("**/*.txt", options, function (err, contents) {
 ## Options
 
 Options are passed through to [glob][glob]. For option details please
-view the glob package.
+view the glob package. Thanks glob and minimatch for your excellence! :)
 
 [glob]: https://www.npmjs.com/package/glob
 
