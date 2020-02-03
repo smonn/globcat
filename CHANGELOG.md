@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.0
+
+- Making it work in Node.js pre-v6.0.0 using babel to build code.
+
 ## 0.6.0
 
 - Fix missing folder in package.json.
