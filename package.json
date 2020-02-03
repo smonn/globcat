@@ -26,24 +26,24 @@
     "globcat": "dist/bin/globcat.js"
   },
   "dependencies": {
-    "async": "^3.1.0",
+    "async": "^3.1.1",
     "combined-stream2": "^1.1.2",
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.1.0",
     "glob": "^7.1.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.7.0",
-    "@babel/core": "^7.7.2",
-    "@babel/preset-env": "^7.7.1",
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
     "babel-eslint": "^10.0.3",
-    "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.7.0",
-    "eslint-plugin-prettier": "^3.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
     "is-stream": "^2.0.0",
     "onchange": "^6.1.0",
     "prettier": "^1.19.1",
-    "tap": "^14.9.2"
+    "tap": "^14.10.6"
   },
   "bugs": {
     "url": "https://github.com/smonn/globcat/issues"
@@ -61,8 +61,8 @@
     ]
   },
   "engines": {
-    "node": ">=6.14.2",
-    "npm": ">=3.10.10"
+    "node": ">=8",
+    "npm": ">=6"
   },
   "homepage": "https://github.com/smonn/globcat#readme",
   "author": "Simon Ingeson <smonnsource@gmail.com> (https://www.smonn.se/)",
