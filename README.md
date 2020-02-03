@@ -2,13 +2,13 @@
 
 Concatenate files from command line with glob pattern.
 
-# Install
+## Install
 
 ```sh
 npm install [-g] globcat
 ```
 
-# Usage
+## Usage
 
 ```javascript
 var globcat = require("globcat");
@@ -35,7 +35,7 @@ globcat(["path/to/file.txt", "other/path/*.txt"], options)
   });
 ```
 
-## Options
+### Options
 
 - `stream` Set to `true` to get a readable stream instead of string in the
   callback. Defaults to `false`.
@@ -57,3 +57,5 @@ Using pipes:
 ```sh
 cat file-with-paths.txt | globcat > combined.txt
 ```
+
+To see available options run `globcat --help`.
