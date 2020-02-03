@@ -3,12 +3,13 @@
 'use strict'
 
 const commandLineArgs = require('command-line-args')
+const commandLineUsage = require('command-line-usage')
 const fs = require('fs')
 const path = require('path')
 const readline = require('readline')
 const globcat = require('../globcat')
 
-const cli = commandLineArgs([
+const optionList = [
   {
     name: 'src', alias: 's', type: String, multiple: true,
     defaultOption: true, description: 'The source file globs'
@@ -21,7 +22,28 @@ const cli = commandLineArgs([
     name: 'help', alias: 'h', type: Boolean,
     description: 'Display this help text'
   }
-])
+]
+
+const usage = [
+  {
+    header: 'globcat',
+    content: 'Concatenate files from command line with glob pattern.'
+  },
+  {
+    header: 'Options',
+    optionList: optionList
+  }
+]
+
+const options = commandLineArgs(optionList)
+
+if (options.help) {
+  process.stdout.write(commandLineUsage(usage) + '\n')
+} else {
+  _combine(options)
+}
+
+// <editor-fold>
 
 function _makeWriteFunction (options) {
   return function (results) {
@@ -71,14 +93,4 @@ function _combine (options) {
   }
 }
 
-const options = cli.parse()
-const usage = {
-  title: 'globcat',
-  description: 'Concatenate files from command line with glob pattern.'
-}
-
-if (options.help) {
-  process.stdout.write(cli.getUsage(usage) + '\n')
-} else {
-  _combine(options)
-}
+// </editor-fold>

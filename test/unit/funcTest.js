@@ -38,6 +38,13 @@ test('func.flatten flattens nested arrays', (assert) => {
   assert.end()
 })
 
+test('func.flatten yields array when argument is not', (assert) => {
+  const value = 1
+  const expected = [ value ]
+  assert.deepEqual(func.flatten(value), expected, 'should have the same array values')
+  assert.end()
+})
+
 test('func.unique filters out duplicate values', (assert) => {
   const list = [ 'foo', 'bar', 'baz', 'foo' ]
   const expected = [ 'foo', 'bar', 'baz' ]
