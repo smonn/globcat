@@ -14,7 +14,7 @@ npm install [-g] globcat
 const globcat = require('globcat')
 
 // just the one...
-globcat('**/*.txt', options, (err, contents) => {
+globcat('**/*.txt', (err, contents) => {
   // contents contains the file contents of the matched files
   // err is an error object or null
 })
