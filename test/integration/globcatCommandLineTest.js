@@ -1,8 +1,8 @@
-const test = require('tape')
+const t = require('tap')
 const path = require('path')
 const exec = require('child_process').exec
 
-test('command line', (assert) => {
+t.test('command line', (assert) => {
   const cwd = process.cwd()
   const file = path.join(cwd, '/dist/bin/globcat.js')
   const glob = `${cwd}/test/**/*.txt`

@@ -1,9 +1,9 @@
-const test = require('tape')
+const t = require('tap')
 const globcat = require('../../dist/globcat')
 const path = require('path')
 const isStream = require('is-stream')
 
-test('globcat includes each file only once', (assert) => {
+t.test('globcat includes each file only once', (assert) => {
   const cwd = process.cwd()
   const pattern = path.join(cwd, 'test/**/*.txt')
   const duplicate = path.join(cwd, 'test/sample/foo.txt')
@@ -22,7 +22,7 @@ test('globcat includes each file only once', (assert) => {
     })
 })
 
-test('globcat streams file content', (assert) => {
+t.test('globcat streams file content', (assert) => {
   const cwd = process.cwd()
   const pattern = path.join(cwd, 'test/**/*.txt')
 
@@ -41,7 +41,7 @@ test('globcat streams file content', (assert) => {
     })
 })
 
-test('globcat fails when matching directory', (assert) => {
+t.test('globcat fails when matching directory', (assert) => {
   const cwd = process.cwd()
   const directory = path.join(cwd, 'test/sample')
   return globcat(directory)
@@ -58,7 +58,7 @@ test('globcat fails when matching directory', (assert) => {
     })
 })
 
-test('globcat allows callback', (assert) => {
+t.test('globcat allows callback', (assert) => {
   const cwd = process.cwd()
   const pattern = path.join(cwd, 'test/**/*.txt')
 
@@ -69,7 +69,7 @@ test('globcat allows callback', (assert) => {
   })
 })
 
-test('globcat allows second argument to be callback', (assert) => {
+t.test('globcat allows second argument to be callback', (assert) => {
   const cwd = process.cwd()
   const pattern = path.join(cwd, 'test/**/*.txt')
 
@@ -80,7 +80,7 @@ test('globcat allows second argument to be callback', (assert) => {
   })
 })
 
-test('globcat yields errors when using callback', (assert) => {
+t.test('globcat yields errors when using callback', (assert) => {
   const cwd = process.cwd()
   const directory = path.join(cwd, 'test/sample')
   globcat(directory, (err) => {
