@@ -12,6 +12,7 @@ cache:
 
 install:
   - npm install --global codecov
+  - npm install
 
 script:
   - npm run coverage
