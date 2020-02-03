@@ -1,5 +1,3 @@
-'use strict'
-
 const test = require('tape')
 const globcat = require('../../dist/globcat')
 const path = require('path')
@@ -10,9 +8,12 @@ test('globcat includes each file only once', (assert) => {
   const pattern = path.join(cwd, 'test/**/*.txt')
   const duplicate = path.join(cwd, 'test/sample/foo.txt')
 
-  return globcat([ pattern, duplicate ])
+  return globcat([pattern, duplicate])
     .then((content) => {
-      assert.ok(/bar\s+baz\s+foo\s+/.test(content), 'should equal file contents')
+      assert.ok(
+        /bar\s+baz\s+foo\s+/.test(content),
+        'should equal file contents'
+      )
       assert.end()
     })
     .catch((err) => {
@@ -27,7 +28,11 @@ test('globcat streams file content', (assert) => {
 
   return globcat(pattern, { stream: true })
     .then((stream) => {
-      assert.equal(isStream.readable(stream), true, 'should be a readable stream')
+      assert.equal(
+        isStream.readable(stream),
+        true,
+        'should be a readable stream'
+      )
       assert.end()
     })
     .catch((err) => {
@@ -45,7 +50,10 @@ test('globcat fails when matching directory', (assert) => {
       assert.end()
     })
     .catch((err) => {
-      assert.ok(/^Not a file:/.test(err.message), 'should be a useful error message')
+      assert.ok(
+        /^Not a file:/.test(err.message),
+        'should be a useful error message'
+      )
       assert.end()
     })
 })
@@ -76,7 +84,10 @@ test('globcat yields errors when using callback', (assert) => {
   const cwd = process.cwd()
   const directory = path.join(cwd, 'test/sample')
   globcat(directory, (err) => {
-    assert.ok(/^Not a file:/.test(err.message), 'should be a useful error message')
+    assert.ok(
+      /^Not a file:/.test(err.message),
+      'should be a useful error message'
+    )
     assert.end()
   })
 })

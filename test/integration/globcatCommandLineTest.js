@@ -1,5 +1,3 @@
-'use strict'
-
 const test = require('tape')
 const path = require('path')
 const exec = require('child_process').exec

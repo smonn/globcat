@@ -6,7 +6,7 @@
 [![node version](https://img.shields.io/node/v/globcat.svg)](https://www.npmjs.org/package/globcat)
 [![npm license](https://img.shields.io/npm/l/globcat.svg)](https://raw.githubusercontent.com/smonn/globcat/master/LICENSE)
 [![GitHub issues](https://img.shields.io/github/issues/smonn/globcat.svg)](https://github.com/smonn/globcat/issues)
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](https://github.com/feross/standard)
+[![prettier.io](https://img.shields.io/badge/code%20style-prettier.io-brightgreen.svg)](https://prettier.io)
 
 # globcat
 
@@ -15,7 +15,7 @@ Concatenate files from command line with glob pattern.
 ## Install
 
 ```sh
-npm install [-g] globcat
+npm install [--global] globcat
 ```
 
 ## Usage
@@ -67,6 +67,13 @@ Using pipes:
 
 ```sh
 cat file-with-paths.txt | globcat > combined.txt
+```
+
+Oneliner without installing using `npx`, use `--quiet` to suppress output from
+`npx` itself:
+
+```sh
+npx --quiet globcat *.txt > all.txt
 ```
 
 To see available options run `globcat --help`.

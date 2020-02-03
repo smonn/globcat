@@ -1,7 +1,5 @@
 #! /usr/bin/env node
 
-'use strict'
-
 const commandLineArgs = require('command-line-args')
 const commandLineUsage = require('command-line-usage')
 const fs = require('fs')
@@ -53,11 +51,12 @@ if (options.help) {
 
 // <editor-fold>
 
-function _makeWriteFunction (options) {
-  return function (results) {
+function _makeWriteFunction(options) {
+  return function(results) {
     if (options.output) {
       const file = fs.createWriteStream(
-        path.join(process.cwd(), options.output))
+        path.join(process.cwd(), options.output)
+      )
       results.pipe(file)
     } else {
       results.pipe(process.stdout)
@@ -65,9 +64,9 @@ function _makeWriteFunction (options) {
   }
 }
 
-function _makeCallbackFunction (options) {
+function _makeCallbackFunction(options) {
   const write = _makeWriteFunction(options)
-  return function (err, results) {
+  return function(err, results) {
     if (err) {
       throw err
     } else {
@@ -76,14 +75,14 @@ function _makeCallbackFunction (options) {
   }
 }
 
-function _makeExecFunction (options) {
+function _makeExecFunction(options) {
   const callback = _makeCallbackFunction(options)
-  return function (patterns) {
+  return function(patterns) {
     globcat(patterns, { stream: true }, callback)
   }
 }
 
-function _combine (options) {
+function _combine(options) {
   const exec = _makeExecFunction(options)
 
   if (options.src) {
