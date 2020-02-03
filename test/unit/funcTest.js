@@ -1,7 +1,7 @@
 'use strict'
 
 const test = require('tape')
-const func = require('../../func')
+const func = require('../../dist/func')
 
 test('func.defaults makes a shallow copy', (assert) => {
   const result = func.defaults({ foo: 'baz' }, { foo: 'bar' })
