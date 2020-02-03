@@ -4,15 +4,13 @@ Concatenate files from command line with glob pattern.
 
 # Install
 
-```
-#!sh
+```sh
 npm install [-g] globcat
 ```
 
 # Usage
 
-```
-#!javascript
+```javascript
 var globcat = require("globcat");
 
 globcat("**/*.txt", options, function (err, contents) {
