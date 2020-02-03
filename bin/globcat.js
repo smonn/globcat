@@ -9,8 +9,9 @@ var readline = require("readline");
 var globcat = require("../globcat");
 
 var cli = commandLineArgs([
-    { name: "src", type: String, multiple: true, defaultOption: true },
-    { name: "output", alias: "o", type: String }
+    { name: "src", alias: "s", type: String, multiple: true, defaultOption: true, description: "The source file globs" },
+    { name: "output", alias: "o", type: String, description: "The file to write the output to" },
+    { name: "help", alias: "h", type: Boolean, description: "Display this help text" }
 ]);
 
 var combine = function (options) {
@@ -56,4 +57,13 @@ var combine = function (options) {
   }
 };
 
-combine(cli.parse());
+var options = cli.parse();
+
+if (options.help) {
+  console.log(cli.getUsage({
+    title: "globcat",
+    description: "Concatenate files from command line with glob pattern."
+  }));
+} else {
+  combine(options);
+}
