@@ -1,11 +1,21 @@
 language: node_js
 
 node_js:
+  - '4'
   - '6'
+  - '8'
+  - 'stable'
 
 cache:
   directories:
     - "node_modules"
+
+install:
+  - npm install --global codecov
+
+script:
+  - npm run coverage
+  - codecov
 
 deploy:
   provider: npm
