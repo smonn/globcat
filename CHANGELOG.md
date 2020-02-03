@@ -3,7 +3,7 @@
 ## 1.2.0
 
 - Updated package dependencies.
-- No requires Node.js 8+.
+- Now requires Node.js 8+.
 
 ## 1.1.2
 
