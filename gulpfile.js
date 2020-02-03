@@ -1,20 +1,22 @@
-var gulp = require('gulp');
-var jscs = require('gulp-jscs');
-var jshint = require('gulp-jshint');
+'use strict';
 
-var src = ['globcat.js', 'test/**/*.js', 'bin/**/*.js'];
+const gulp = require('gulp');
+const jscs = require('gulp-jscs');
+const jshint = require('gulp-jshint');
+
+const src = ['globcat.js', 'test/**/*.js', 'bin/**/*.js'];
 
 gulp.task('style', function() {
-    return gulp.src(src)
-        .pipe(jscs())
-        .pipe(jscs.reporter());
+  return gulp.src(src)
+    .pipe(jscs())
+    .pipe(jscs.reporter());
 });
 
-gulp.task('lint', function () {
-    return gulp.src(src)
-        .pipe(jshint('.jshintrc'))
-        .pipe(jshint.reporter('jshint-stylish'))
-        .pipe(jshint.reporter('fail'));
+gulp.task('lint', function() {
+  return gulp.src(src)
+    .pipe(jshint('.jshintrc'))
+    .pipe(jshint.reporter('jshint-stylish'))
+    .pipe(jshint.reporter('fail'));
 });
 
 gulp.task('default', ['style', 'lint']);

@@ -1,38 +1,40 @@
+/*globals describe, it */
 'use strict';
 
-var assert = require('chai').assert;
-var path = require('path');
-var globcat = require('../globcat');
-var isStream = require('is-stream');
+const assert = require('chai').assert;
+const path = require('path');
+const globcat = require('../globcat');
+const isStream = require('is-stream');
 
 describe('globcat', function() {
   it('should include each file only once', function(done) {
-    var cwd = process.cwd();
-    var pattern = path.join(cwd, 'test/**/*.txt');
-    var duplicate = path.join(cwd, 'test/sample/foo.txt');
+    const cwd = process.cwd();
+    const pattern = path.join(cwd, 'test/**/*.txt');
+    const duplicate = path.join(cwd, 'test/sample/foo.txt');
 
-    globcat([pattern, duplicate], {}, function(err, results) {
-      assert.match(results, /^bar\s+baz\s+foo\s*$/g,
+    globcat([pattern, duplicate], {}, (err, results) => {
+      assert.equal(results, 'bar\nbaz\nfoo\n',
         'only once of each file content');
       done();
     });
   });
 
   it('should stream file content', function(done) {
-    var cwd = process.cwd();
-    var pattern = path.join(cwd, 'test/**/*.txt');
+    const cwd = process.cwd();
+    const pattern = path.join(cwd, 'test/**/*.txt');
 
-    globcat(pattern, { stream: true }, function(err, results) {
-      assert.isTrue(isStream.readable(results),
+    globcat(pattern, {stream: true}, (err, results) => {
+      assert.equal(isStream.readable(results), true,
         'results should be a readable stream');
       done();
     });
   });
 
   it('should fail when matching directory', function(done) {
-    globcat('*', {}, function(err, results) {
-      assert.isOk(err, 'error should be thrown, cannot stream directories');
-      assert.isNotOk(results, 'should have empty results');
+    globcat('*', {}, (err, results) => {
+      assert.equal(err.code, 'EISDIR',
+        'error should be thrown, cannot stream directories');
+      assert.equal(results, undefined, 'should have empty results');
       done();
     });
   });

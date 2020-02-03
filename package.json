@@ -17,22 +17,22 @@
     "globcat": "bin/globcat.js"
   },
   "dependencies": {
-    "async": "~1.5.2",
-    "combined-stream2": "~1.1.1",
-    "command-line-args": "~2.1.6",
-    "glob": "~7.0.0",
-    "ramda": "~0.19.1"
+    "async": "^2.0.0-rc.1",
+    "combined-stream2": "^1.1.2",
+    "command-line-args": "^2.1.6",
+    "glob": "^7.0.3",
+    "ramda": "^0.19.1"
   },
   "devDependencies": {
-    "chai": "~3.5.0",
-    "gulp": "~3.9.1",
-    "gulp-jscs": "~3.0.2",
-    "gulp-jshint": "~2.0.0",
-    "is-stream": "~1.0.1",
-    "jshint": "~2.9.1",
-    "jshint-stylish": "~2.1.0",
-    "lodash": "~4.5.0",
-    "mocha": "~2.4.5"
+    "chai": "^3.5.0",
+    "gulp": "^3.9.1",
+    "gulp-jscs": "^3.0.2",
+    "gulp-jshint": "^2.0.0",
+    "is-stream": "^1.0.1",
+    "jshint": "^2.9.1",
+    "jshint-stylish": "^2.1.0",
+    "lodash": "^4.6.1",
+    "mocha": "^2.4.5"
   },
   "bugs": {
     "url": "https://github.com/smonn/globcat/issues"
@@ -42,6 +42,6 @@
     "url": "git+ssh://git@github.com/smonn/globcat.git"
   },
   "homepage": "https://github.com/smonn/globcat#readme",
-  "author": "Simon Ingeson <simon.ingeson@gmail.com> (http://ingeson.se/)",
+  "author": "Simon Ingeson <simon.ingeson@gmail.com> (http://www.ingeson.se/)",
   "license": "MIT"
 }

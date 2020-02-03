@@ -2,33 +2,40 @@
 
 'use strict';
 
-var commandLineArgs = require('command-line-args');
-var fs = require('fs');
-var path = require('path');
-var readline = require('readline');
-var globcat = require('../globcat');
+const commandLineArgs = require('command-line-args');
+const fs = require('fs');
+const path = require('path');
+const readline = require('readline');
+const globcat = require('../globcat');
 
-var cli = commandLineArgs([
-    { name: 'src', alias: 's', type: String, multiple: true,
-      defaultOption: true, description: 'The source file globs', },
-    { name: 'output', alias: 'o', type: String,
-      description: 'The file to write the output to', },
-    { name: 'help', alias: 'h', type: Boolean,
-      description: 'Display this help text', },
+const cli = commandLineArgs([
+  {
+    name: 'src', alias: 's', type: String, multiple: true,
+    defaultOption: true, description: 'The source file globs',
+  },
+  {
+    name: 'output', alias: 'o', type: String,
+    description: 'The file to write the output to',
+  },
+  {
+    name: 'help', alias: 'h', type: Boolean,
+    description: 'Display this help text',
+  },
 ]);
 
-var combine = function(options) {
-  var write = function(results) {
+const combine = function(options) {
+  const write = function(results) {
     if (options.output) {
-      var file = fs.createWriteStream(path.join(process.cwd(), options.output));
+      const file = fs.createWriteStream(
+        path.join(process.cwd(), options.output));
       results.pipe(file);
     } else {
       results.pipe(process.stdout);
     }
   };
 
-  var exec = function(patterns) {
-    globcat(patterns, { stream: true }, function(err, results) {
+  const exec = function(patterns) {
+    globcat(patterns, {stream: true}, function(err, results) {
       if (err) {
         throw err;
       } else {
@@ -40,12 +47,12 @@ var combine = function(options) {
   if (options.src) {
     exec(options.src);
   } else {
-    var rl = readline.createInterface({
+    const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
       terminal: false,
     });
-    var lines = [];
+    const lines = [];
 
     rl.on('line', function(line) {
       lines.push(line);
@@ -57,7 +64,7 @@ var combine = function(options) {
   }
 };
 
-var options = cli.parse();
+const options = cli.parse();
 
 if (options.help) {
   console.log(cli.getUsage({
