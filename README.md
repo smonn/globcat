@@ -28,10 +28,14 @@ view the glob package.
 
 ## Command Line
 
-```sh
-# using CLI arguments
-globcat path/*.txt other/**/*.txt --output combined.txt
+Using CLI arguments:
 
-# using pipes
+```sh
+globcat path/*.txt other/**/*.txt --output combined.txt
+```
+
+Using pipes:
+
+```sh
 cat file-with-paths.txt | globcat > combined.txt
 ```
