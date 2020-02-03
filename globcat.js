@@ -1,95 +1,14 @@
-'use strict';
+'use strict'
 
-const glob = require('glob');
-const async = require('async');
-const fs = require('fs');
-const combined = require('combined-stream2');
-const func = require('./func');
+const glob = require('./lib/globPromise')
+const func = require('./func')
+const filesToStream = require('./lib/filesToStream')
+const streamToString = require('./lib/streamToString')
 
 const _defaults = {
   glob: {},
-  stream: false,
-};
-
-const _promiseGlob = function(patterns, options) {
-  patterns = Array.isArray(patterns) ? patterns : [patterns];
-  return new Promise((resolve, reject) => {
-    async.map(patterns, function(pattern, done) {
-      glob(pattern, options, done);
-    }, function(err, results) {
-      if (err) {
-        reject(err);
-      } else {
-        resolve(func.uniq(func.flatten(results)));
-      }
-    });
-  });
-};
-
-const _createStream = function(files) {
-  return new Promise((resolve, reject) => {
-    async.map(files, (file, done) => {
-      let callback = func.once(done);
-
-      fs.stat(file, (err, stats) => {
-        if (err) {
-          callback(err);
-          return;
-        }
-
-        if (stats.isFile()) {
-          let stream = fs.createReadStream(file);
-
-          stream.on('open', () => {
-            callback(null, stream);
-          });
-
-          stream.on('error', (err) => {
-            callback(err);
-          });
-        } else {
-          callback(new Error('Not a file: ' + file));
-        }
-      });
-    }, (err, streams) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-
-      let stream = streams.reduce((combinedStream, fileStream) => {
-        combinedStream.append(fileStream);
-        return combinedStream;
-      }, combined.create());
-
-      resolve(stream);
-    });
-  });
-};
-
-const _toString = function(asStream) {
-  return function(stream) {
-    if (asStream) {
-      return stream;
-    }
-
-    return new Promise((resolve, reject) => {
-      let str = '';
-
-      stream.on('data', (buffer) => {
-        str += buffer;
-      });
-
-      stream.on('error', (err) => {
-        reject(err);
-      });
-
-      stream.on('end', () => {
-        resolve(str);
-      });
-    });
-  };
-};
+  stream: false
+}
 
 /**
  * Find files using glob pattern(s) get a string or stream of
@@ -102,27 +21,33 @@ const _toString = function(asStream) {
  * @returns {Promise} Returns a promise if no callback is provided.
  * @see {@link https://www.npmjs.com/package/glob}
  */
-module.exports = function(patterns, options, callback) {
-  let settings = func.defaults(_defaults, options);
-  let promise = _promiseGlob(patterns, settings.glob)
-    .then(_createStream)
-    .then(_toString(settings.stream))
+module.exports = function (patterns, options, callback) {
+  let settings = func.defaults(_defaults, options)
+  let promise = glob(patterns, settings.glob)
+    .then(filesToStream)
+    .then((stream) => {
+      if (settings.stream) {
+        return stream
+      }
+
+      return streamToString(stream)
+    })
     .then((result) => {
       if (callback) {
-        callback(null, result);
+        callback(null, result)
       } else {
-        return result;
+        return result
       }
     })
     .catch((err) => {
       if (callback) {
-        callback(err);
+        callback(err)
       } else {
-        throw err;
+        throw err
       }
-    });
+    })
 
   if (!callback) {
-    return promise;
+    return promise
   }
-};
+}

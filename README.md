@@ -60,6 +60,14 @@ cat file-with-paths.txt | globcat > combined.txt
 
 # Changelog
 
+## 0.5.0
+
+- Node v6.0.0.
+- Switched to [http://standardjs.com/](http://standardjs.com/) for
+  code style and linting.
+- Switched to [tape](https://www.npmjs.com/package/tape) for tests.
+- Code refactoring and cleanup.
+
 ## 0.4.1
 
 - Removed dependency on lodash.

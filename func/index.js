@@ -1,8 +1,17 @@
-'use strict';
+'use strict'
 
-exports.curry = require('./curry');
-exports.once = require('./once');
-exports.defaults = require('./defaults');
-exports.typeOf = require('./typeof');
-exports.flatten = require('./flatten');
-exports.uniq = require('./uniq');
+const curry = require('./curry')
+const once = require('./once')
+const defaults = require('./defaults')
+const typeOf = require('./typeof')
+const flatten = require('./flatten')
+const unique = require('./unique')
+
+module.exports = {
+  curry,
+  once,
+  defaults,
+  typeOf,
+  flatten,
+  unique
+}

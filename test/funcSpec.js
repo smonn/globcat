@@ -1,52 +1,63 @@
-/*globals describe, it */
-'use strict';
+'use strict'
 
-const assert = require('chai').assert;
-const func = require('../func');
+const test = require('tape')
+const func = require('../func')
 
-describe('func', function() {
-  describe('#defaults', function() {
-    it('makes a shallow copy', function() {
-      let result = func.defaults({foo: 'baz'}, {foo: 'bar'});
-      assert.equal(result.foo, 'bar');
-    });
+test('func#defaults makes a shallow copy', (assert) => {
+  const result = func.defaults({ foo: 'baz' }, { foo: 'bar' })
+  assert.equal(result.foo, 'bar')
+  assert.end()
+})
 
-    it('makes a deep copy', function() {
-      let result = func.defaults({foo: {bar: 1, baz: 2}}, {foo: {bar: 3}});
-      let expectedBar = 3;
-      let expectedBaz = 2;
-      assert.equal(result.foo.bar, expectedBar, 'value should be overridden');
-      assert.equal(result.foo.baz, expectedBaz, 'value should be kept');
-    });
-  });
+test('func#defauts makes a deep copy', (assert) => {
+  const result = func.defaults({ foo: { bar: 1, baz: 2 } }, { foo: { bar: 3 } })
+  const expectedBar = 3
+  const expectedBaz = 2
+  assert.equal(result.foo.bar, expectedBar, 'value should be overridden')
+  assert.equal(result.foo.baz, expectedBaz, 'value should be kept')
+  assert.end()
+})
 
-  describe('#once', function() {
-    it('calls function only once', function() {
-      let value = 1;
-      let expectedValue = 2;
-      let inc = func.once(() => {
-        value += value;
-      });
-      inc();
-      inc();
-      assert.equal(value, expectedValue);
-    });
-  });
+test('func#once calls function only once', (assert) => {
+  let value = 1
+  const expectedValue = 2
+  const inc = func.once(() => {
+    value += 1
+  })
+  inc()
+  inc()
+  assert.equal(value, expectedValue)
+  assert.end()
+})
 
-  describe('#flatten', function() {
-    it('flattens nested arrays', function() {
-      let numbers = {one: 1, two: 2, three: 3};
-      let array = [numbers.one, [numbers.two, [numbers.three]]];
-      let expected = [numbers.one, numbers.two, numbers.three];
-      assert.sameMembers(func.flatten(array), expected);
-    });
-  });
+test('func#flatten flattens nested arrays', (assert) => {
+  const numbers = { one: 1, two: 2, three: 3 }
+  const array = [ numbers.one, [ numbers.two, [ numbers.three ] ] ]
+  const expected = [ numbers.one, numbers.two, numbers.three ]
+  assert.deepEqual(func.flatten(array), expected)
+  assert.end()
+})
 
-  describe('#uniq', function() {
-    it('filters out duplicate values', function() {
-      let list = ['foo', 'bar', 'baz', 'foo'];
-      let expected = ['foo', 'bar', 'baz'];
-      assert.sameMembers(func.uniq(list), expected);
-    });
-  });
-});
+test('func#unique filters out duplicate values', (assert) => {
+  const list = [ 'foo', 'bar', 'baz', 'foo' ]
+  const expected = [ 'foo', 'bar', 'baz' ]
+  assert.deepEqual(func.unique(list), expected)
+  assert.end()
+})
+
+test('func#typeOf prints correct type', (assert) => {
+  const id = function (x) {
+    return x
+  }
+
+  assert.equal(func.typeOf(''), 'string')
+  assert.equal(func.typeOf({}), 'object')
+  assert.equal(func.typeOf([]), 'array')
+  assert.equal(func.typeOf(NaN), 'number')
+  assert.equal(func.typeOf(/abc/), 'regexp')
+  assert.equal(func.typeOf(true), 'boolean')
+  assert.equal(func.typeOf(Math), 'math')
+  assert.equal(func.typeOf(new Date()), 'date')
+  assert.equal(func.typeOf(id), 'function')
+  assert.end()
+})
