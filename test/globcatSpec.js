@@ -1,9 +1,9 @@
 /*globals describe, it */
 'use strict';
 
+const globcat = require('../globcat');
 const assert = require('chai').assert;
 const path = require('path');
-const globcat = require('../globcat');
 const isStream = require('is-stream');
 
 describe('globcat', function() {
@@ -12,30 +12,41 @@ describe('globcat', function() {
     const pattern = path.join(cwd, 'test/**/*.txt');
     const duplicate = path.join(cwd, 'test/sample/foo.txt');
 
-    globcat([pattern, duplicate], {}, (err, results) => {
-      assert.equal(results, 'bar\nbaz\nfoo\n',
-        'only once of each file content');
-      done();
-    });
+    return globcat([pattern, duplicate])
+      .then((content) => {
+        assert.equal(content, 'bar\nbaz\nfoo\n');
+        done();
+      });
   });
 
   it('should stream file content', function(done) {
     const cwd = process.cwd();
     const pattern = path.join(cwd, 'test/**/*.txt');
 
-    globcat(pattern, {stream: true}, (err, results) => {
-      assert.equal(isStream.readable(results), true,
-        'results should be a readable stream');
-      done();
-    });
+    return globcat(pattern, {stream: true})
+      .then((stream) => {
+        assert.equal(isStream.readable(stream), true);
+        done();
+      });
   });
 
   it('should fail when matching directory', function(done) {
-    globcat('*', {}, (err, results) => {
-      assert.equal(err.code, 'EISDIR',
-        'error should be thrown, cannot stream directories');
-      assert.equal(results, undefined, 'should have empty results');
+    return globcat('*')
+      .catch((err) => {
+        assert.match(err.message, /^not a file/i);
+        done();
+      });
+  });
+
+  it('should allow callback', function(done) {
+    const cwd = process.cwd();
+    const pattern = path.join(cwd, 'test/**/*.txt');
+
+    globcat(pattern, {}, (err, content) => {
+      assert.equal(content, 'bar\nbaz\nfoo\n');
       done();
     });
   });
 });
+
+

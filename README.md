@@ -24,6 +24,15 @@ globcat(["path/to/file.txt", "other/path/*.txt"], options, function (err, conten
   // contents contains the file contents of the matched files
   // err is an error object or null
 });
+
+// as promise
+globcat(["path/to/file.txt", "other/path/*.txt"], options)
+  .then(function(contents) {
+    // use contents
+  })
+  .catch(function(err) {
+    // handle error
+  });
 ```
 
 ## Options
@@ -54,6 +63,8 @@ cat file-with-paths.txt | globcat > combined.txt
 ## 0.4.0
 
 - Updated package dependencies.
+- Switched from JSHint to ESLint.
+- Introduced promise support.
 
 ## 0.3.1
 
