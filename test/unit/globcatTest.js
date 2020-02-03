@@ -60,3 +60,14 @@ test('globcat allows callback', (assert) => {
     assert.end()
   })
 })
+
+test('globcat allows second argument to be callback', (assert) => {
+  const cwd = process.cwd()
+  const pattern = path.join(cwd, 'test/**/*.txt')
+
+  globcat(pattern, (err, content) => {
+    assert.error(err, 'no errors')
+    assert.equal(content, 'bar\nbaz\nfoo\n', 'should equal file contents')
+    assert.end()
+  })
+})
