@@ -11,28 +11,28 @@ npm install [-g] globcat
 ## Usage
 
 ```javascript
-var globcat = require("globcat");
+const globcat = require('globcat')
 
 // just the one...
-globcat("**/*.txt", options, function (err, contents) {
+globcat('**/*.txt', options, (err, contents) => {
   // contents contains the file contents of the matched files
   // err is an error object or null
-});
+})
 
 // ... or with array
-globcat(["path/to/file.txt", "other/path/*.txt"], options, function (err, contents) {
+globcat(['path/to/file.txt', 'other/path/*.txt'], options, (err, contents) => {
   // contents contains the file contents of the matched files
   // err is an error object or null
-});
+})
 
 // as promise
-globcat(["path/to/file.txt", "other/path/*.txt"], options)
+globcat(['path/to/file.txt', 'other/path/*.txt'], options)
   .then(function(contents) {
     // use contents
   })
   .catch(function(err) {
     // handle error
-  });
+  })
 ```
 
 ### Options
