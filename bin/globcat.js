@@ -23,8 +23,8 @@ const cli = commandLineArgs([
   },
 ]);
 
-const combine = function(options) {
-  const write = function(results) {
+const makeWriteFunction = function(options) {
+  return function(results) {
     if (options.output) {
       const file = fs.createWriteStream(
         path.join(process.cwd(), options.output));
@@ -33,44 +33,51 @@ const combine = function(options) {
       results.pipe(process.stdout);
     }
   };
+};
 
-  const exec = function(patterns) {
-    globcat(patterns, {stream: true}, function(err, results) {
-      if (err) {
-        throw err;
-      } else {
-        write(results);
-      }
-    });
+const makeCallbackFunction = function(options) {
+  const write = makeWriteFunction(options);
+  return function(err, results) {
+    if (err) {
+      throw err;
+    } else {
+      write(results);
+    }
   };
+};
+
+const makeExecFunction = function(options) {
+  const callback = makeCallbackFunction(options);
+  return function(patterns) {
+    globcat(patterns, {stream: true}, callback);
+  };
+};
+
+const combine = function(options) {
+  const exec = makeExecFunction(options);
 
   if (options.src) {
     exec(options.src);
   } else {
+    const lines = [];
     const rl = readline.createInterface({
       input: process.stdin,
       output: process.stdout,
       terminal: false,
     });
-    const lines = [];
 
-    rl.on('line', function(line) {
-      lines.push(line);
-    });
-
-    rl.on('close', function() {
-      exec(lines);
-    });
+    rl.on('line', (line) => lines.push(line));
+    rl.on('close', () => exec(lines));
   }
 };
 
 const options = cli.parse();
 
 if (options.help) {
-  console.log(cli.getUsage({
+  process.stdout.write(cli.getUsage({
     title: 'globcat',
     description: 'Concatenate files from command line with glob pattern.',
-  }));
+  }) + '\n');
 } else {
   combine(options);
 }
