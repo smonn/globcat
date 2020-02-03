@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.5
+
+- Updated build setup.
+
 ## 1.0.4
 
 - Updated package dependencies.
