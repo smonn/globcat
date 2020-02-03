@@ -11,18 +11,18 @@
   ],
   "main": "dist/globcat.js",
   "scripts": {
-    "precoverage": "npm run build && echo '===== coverage'",
-    "coverage": "istanbul cover tape -- 'test/**/*Test.js'",
-    "prelint": "echo '===== lint'",
+    "precoverage": "npm run build && echo ===== coverage",
+    "coverage": "istanbul cover tape -- \"test/**/*Test.js\"",
+    "prelint": "echo ===== lint",
     "lint": "standard",
-    "prebuild": "npm run lint && echo '===== build'",
+    "prebuild": "npm run lint && echo ===== build",
     "build": "babel src --out-dir dist",
-    "pretest": "npm run build && echo '===== test'",
-    "test": "tape 'test/**/*Test.js' | tap-spec",
+    "pretest": "npm run build && echo ===== test",
+    "test": "tape \"test/**/*Test.js\" | tap-spec",
     "preversion": "npm test",
     "postversion": "git push && git push --tags",
     "prewatch": "npm install --silent",
-    "watch": "onchange globcat.js test/**/*Test.js src/**/*.js -i -w -- npm test"
+    "watch": "onchange \"test/**/*Test.js\" \"src/**/*.js\" -i -v -w -- npm test"
   },
   "bin": {
     "globcat": "dist/bin/globcat.js"
@@ -32,16 +32,15 @@
     "combined-stream2": "^1.1.2",
     "command-line-args": "^3.0.0",
     "command-line-usage": "^3.0.3",
-    "glob": "^7.0.5",
-    "onchange": "^2.5.0"
+    "glob": "^7.0.5"
   },
   "devDependencies": {
     "babel-cli": "^6.10.1",
     "babel-preset-es2015": "^6.9.0",
     "is-stream": "^1.1.0",
     "istanbul": "^0.4.4",
-    "onchange": "^2.4.0",
-    "standard": "^7.1.2",
+    "onchange": "^3.0.0",
+    "standard": "^8.0.0",
     "tap-spec": "^4.1.1",
     "tape": "^4.6.0"
   },

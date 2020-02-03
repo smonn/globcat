@@ -11,15 +11,23 @@ const globcat = require('../globcat')
 
 const optionList = [
   {
-    name: 'src', alias: 's', type: String, multiple: true,
-    defaultOption: true, description: 'The source file globs'
+    name: 'src',
+    alias: 's',
+    type: String,
+    multiple: true,
+    defaultOption: true,
+    description: 'The source file globs'
   },
   {
-    name: 'output', alias: 'o', type: String,
+    name: 'output',
+    alias: 'o',
+    type: String,
     description: 'The file to write the output to'
   },
   {
-    name: 'help', alias: 'h', type: Boolean,
+    name: 'help',
+    alias: 'h',
+    type: Boolean,
     description: 'Display this help text'
   }
 ]

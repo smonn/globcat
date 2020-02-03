@@ -12,7 +12,7 @@ test('globcat includes each file only once', (assert) => {
 
   return globcat([ pattern, duplicate ])
     .then((content) => {
-      assert.equal(content, 'bar\nbaz\nfoo\n', 'should equal file contents')
+      assert.ok(/bar\s+baz\s+foo\s+/.test(content), 'should equal file contents')
       assert.end()
     })
     .catch((err) => {
@@ -45,7 +45,7 @@ test('globcat fails when matching directory', (assert) => {
       assert.end()
     })
     .catch((err) => {
-      assert.equal(err.message, `Not a file: ${directory}`, 'should be a useful error message')
+      assert.ok(/^Not a file:/.test(err.message), 'should be a useful error message')
       assert.end()
     })
 })
@@ -56,7 +56,7 @@ test('globcat allows callback', (assert) => {
 
   globcat(pattern, {}, (err, content) => {
     assert.error(err, 'no errors')
-    assert.equal(content, 'bar\nbaz\nfoo\n', 'should equal file contents')
+    assert.ok(/bar\s+baz\s+foo\s+/.test(content), 'should equal file contents')
     assert.end()
   })
 })
@@ -67,7 +67,7 @@ test('globcat allows second argument to be callback', (assert) => {
 
   globcat(pattern, (err, content) => {
     assert.error(err, 'no errors')
-    assert.equal(content, 'bar\nbaz\nfoo\n', 'should equal file contents')
+    assert.ok(/bar\s+baz\s+foo\s+/.test(content), 'should equal file contents')
     assert.end()
   })
 })
@@ -76,7 +76,7 @@ test('globcat yields errors when using callback', (assert) => {
   const cwd = process.cwd()
   const directory = path.join(cwd, 'test/sample')
   globcat(directory, (err) => {
-    assert.equal(err.message, `Not a file: ${directory}`, 'should be a useful error message')
+    assert.ok(/^Not a file:/.test(err.message), 'should be a useful error message')
     assert.end()
   })
 })

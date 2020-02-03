@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.1
+
+- Updated package dependencies.
+- Code fixes in tests to ensure they run under Windows.
+
 ## 1.0.0
 
 - Updated package dependencies.
