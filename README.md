@@ -51,6 +51,10 @@ cat file-with-paths.txt | globcat > combined.txt
 
 # Changelog
 
+## 0.2.1
+
+- Removed dependency on shelljs for string results.
+
 ## 0.2.0
 
 - Added support to return readable streams instead of string.
