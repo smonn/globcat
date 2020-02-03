@@ -1,15 +1,13 @@
+language: node_js
+
+node_js:
+  - '6'
+
 deploy:
   provider: npm
-  email: simon.ingeson@gmail.com
+  email: smonnsource@gmail.com
   api_key:
-    secure: hVMyTrfOmX3anYDmOnOU9NuNnZ5axlNVlxzOInT4bAdkWzX2WBU7gHMpUToQkwJ9wMIo48G9/Gy8WOPLNzKFulSsx4o1cO0vhClRVSu8Qdd4FZ7IeLt8SwqTPWdW/RBdSD/e42aBci64E9Jyc4If1UnTjlPWKc8beDdmsOjyyeK364obozMfVZAaR5/In0GWUSBiwvaU3DcPWEoZ8rAUQbFLs1oMPjU/Q6qlmuG/bed4780Uyvg69SvuOidI0E5/Lm2DivdLaMkyHlBwpcqCPflLo8D5DXE3y7IOI793bpCVxtAAn7/wlaMi4ZWJeEffiOJcQ+PZwbz4VxyWRZXd9d/g20tMftxzszaU6eGU163qc6TP0Ftmzv2eSTwZcsErXgqy49nv8kN70TCnDH+8jbI8qNtScT53ySuUimSIr3Z64vwbwOzdYRdA5gQ9l4E3SVFBYNrUgNy7dqn0p/f4WDFZlzhGEWjslNlsMPxjrl9/kKC4wwmHswy6+gDwKB+JMMpu/4O6b+uzYAi37yv+awVW3sD+g8phif9EumvDmXejORovgubxzjanYY/5Lgq3LdMhs2xVhMu4GRMtCxnLe5gzUmK2ZYQp9swx9rFMUoFpzqjk5diANDLnsDEws+E2LviALkaPIqCeGCBA4Cj46XhfBYYeU6sKYwTXELx6SyE=
+    secure: BDXQDdV8ft6JGoZe0ZL599QI4WnMl/lq009ky/d04JM60CgefOTHNtV9uVK4+Mo0nkShKJm1b7FdKNXetpacAB4ETsaro59DHYxg9xC7QFXatAeR8V51ThfGNwWnm21z6m9+cHjXOzFQv05JD546pzTelDIW5h8zWd6on8oPAj6E5pFBqeSPJyg1eqsMe4PjIiNjTB1i+HLRiuYfEAGxakvnNf4cXcqA6AyV4RuyOABUBloALqXAAAnXtcYojT43B1Idc7ZNE801PqICJ2BBqCzOv4PO7HrQG7rtFZqhQKlwyT7dY8GRAUr1Z6jdTXKmO77da+y2BczDtiwejp0xk37xBmIAT1Y3m2XqSNA6z4gAWl2K7CG4zN3IenC6rv+9+65iN5qSdp4z5UcqLaDuZauGcBGTBtiO8JzebYpnEXboZCOxvrQ3cs849O+9lcJZjWkCaqx8vIE1YUi4RuqZ2r6186IPfhqOeALv30+3J0VhCJTzwAS1U3C3rrUlZyp855HnsLb8gFBxsd5Pzsbu207Da5uljv62T2FlwBgkH1BsrKXCxVvqS6CzN9s3GRi9JP0jakCe6Lp9Ptg5S2cOo0S6D/W9hk5mFeAlxQpBeal+ndIJQuLDUg65k4e4X1BfiqJIa6AkXM5/WU1ERnqJLVjBH0F/wt288YmRBm9cFsg=
   on:
     tags: true
     repo: smonn/globcat
-language: node_js
-node_js:
-  - "node"
-  - "7"
-  - "6"
-  - "5"
-  - "4"
