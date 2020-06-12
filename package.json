@@ -11,39 +11,34 @@
   ],
   "main": "dist/globcat.js",
   "scripts": {
-    "prelint": "echo ===== lint",
     "lint": "eslint . --fix",
-    "prebuild": "npm run lint && echo ===== build",
     "build": "babel src --out-dir dist",
-    "pretest": "npm run build && echo ===== test",
-    "test": "tap \"test/**/*Test.js\"",
-    "preversion": "npm test",
-    "postversion": "git push && git push --tags",
-    "prewatch": "npm install --silent",
-    "watch": "onchange \"test/**/*Test.js\" \"src/**/*.js\" -i -v -w -- npm test"
+    "test": "mocha 'tests/**/*.spec.js'",
+    "test:watch": "npm test -- --watch"
   },
   "bin": {
     "globcat": "dist/bin/globcat.js"
   },
   "dependencies": {
-    "async": "^3.1.1",
+    "async": "^3.2.0",
     "combined-stream2": "^1.1.2",
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.1.0",
     "glob": "^7.1.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/preset-env": "^7.8.4",
-    "babel-eslint": "^10.0.3",
-    "eslint": "^6.8.0",
-    "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-prettier": "^3.1.2",
+    "@babel/cli": "^7.10.1",
+    "@babel/core": "^7.10.2",
+    "@babel/preset-env": "^7.10.2",
+    "babel-eslint": "^10.1.0",
+    "chai": "^4.2.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
     "is-stream": "^2.0.0",
-    "onchange": "^6.1.0",
-    "prettier": "^1.19.1",
-    "tap": "^14.10.6"
+    "mocha": "^8.0.1",
+    "onchange": "^7.0.2",
+    "prettier": "^2.0.5"
   },
   "bugs": {
     "url": "https://github.com/smonn/globcat/issues"

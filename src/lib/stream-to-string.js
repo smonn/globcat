@@ -21,6 +21,6 @@ function _makeStreamToStringCallback(stream) {
  * @param {Stream} stream - A readable stream.
  * @return {Promise} A promise that resolves to a string.
  */
-module.exports = function(stream) {
+module.exports = function (stream) {
   return new Promise(_makeStreamToStringCallback(stream))
 }

@@ -27,6 +27,6 @@ function _makeGlobPromiseCallback(patterns, options) {
  * @param {Object} options - Options object sent to glob.
  * @return {Promise} A promise that resolves to a list of paths.
  */
-module.exports = function(patterns, options) {
+module.exports = function (patterns, options) {
   return new Promise(_makeGlobPromiseCallback(patterns, options))
 }

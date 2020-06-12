@@ -1,8 +1,8 @@
-module.exports = function(fn) {
+module.exports = function (fn) {
   let value
   let called = false
 
-  return function() {
+  return function () {
     if (called) {
       return value
     }

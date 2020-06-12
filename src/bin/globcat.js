@@ -52,7 +52,7 @@ if (options.help) {
 // <editor-fold>
 
 function _makeWriteFunction(options) {
-  return function(results) {
+  return function (results) {
     if (options.output) {
       const file = fs.createWriteStream(
         path.join(process.cwd(), options.output)
@@ -66,7 +66,7 @@ function _makeWriteFunction(options) {
 
 function _makeCallbackFunction(options) {
   const write = _makeWriteFunction(options)
-  return function(err, results) {
+  return function (err, results) {
     if (err) {
       throw err
     } else {
@@ -77,7 +77,7 @@ function _makeCallbackFunction(options) {
 
 function _makeExecFunction(options) {
   const callback = _makeCallbackFunction(options)
-  return function(patterns) {
+  return function (patterns) {
     globcat(patterns, { stream: true }, callback)
   }
 }

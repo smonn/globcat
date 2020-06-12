@@ -33,7 +33,7 @@ function _makeStatsCallback(done, file) {
  * @param {String[]} files - An array of paths.
  * @return {Promise} A promise which resolves to a stream.
  */
-module.exports = function(files) {
+module.exports = function (files) {
   return new Promise((resolve, reject) => {
     async.map(
       files,

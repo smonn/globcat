@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.3.0
+
+- Updated package dependencies.
+- Now requires Node.js 10+.
+- Switched to mocha and chai for tests.
+
 ## 1.2.1
 
 - Updated package dependencies.
