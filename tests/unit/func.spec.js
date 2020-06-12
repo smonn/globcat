@@ -1,5 +1,5 @@
 const { assert } = require('chai')
-const func = require('../../dist/func')
+const func = require('../../src/func')
 
 describe('func', function () {
   describe('defaults', function () {

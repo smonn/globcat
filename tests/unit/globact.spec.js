@@ -1,5 +1,5 @@
 const { assert } = require('chai')
-const globcat = require('../../dist/globcat')
+const globcat = require('../../src/globcat')
 const path = require('path')
 const isStream = require('is-stream')
 

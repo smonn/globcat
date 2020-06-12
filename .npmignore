@@ -1,7 +1,10 @@
-coverage
-test
-src
-.travis.yml
-.npmignore
-.gitignore
 .babelrc
+.eslintignore
+.eslintrc
+.gitignore
+.npmignore
+.prettierrc
+.travis.yml
+coverage
+src
+test
