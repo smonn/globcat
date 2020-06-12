@@ -1,19 +1,18 @@
 language: node_js
-
 node_js:
-  - 'lts/*'
-
+  - lts/*
+install:
+  - npm ci
 script:
   - npm run lint
   - npm run build
   - npm test
-
 deploy:
   provider: npm
   email: smonnsource@gmail.com
   skip_cleanup: true
-  api_key:
-    secure: $NPM_AUTH_TOKEN
   on:
     tags: true
     repo: smonn/globcat
+  api_key:
+    secure: tmCnzqn+FJKCrX+xOMZxfm2UPVitLZOdpbYh5z3WrZmqLy83+PU1PwIVreY+TQhWk+UcCtXzFP90dhTIv3RXuWgtWfeZcAoMoJiNlTIzru/V0qBY9LtxrGSEV4QJLw6fxP/9sOZzKqNnhNhAI0FL8wz9bHvNdnV5n4ZGReXQokzO8PKQAPZ6nzgobccoMLaFyHpfQu9eIdKPSmpBQsh5lCDpkPj8epAx1eH7zfH84vokW4rXGHRkaG5FnPL7kxyEuvOuhlPOfLvpEr2K9vp68lib0RWnAcHSOQ6lctJBp+bJokOPlmuMF/XQSy9EZjpySGUP/jd3j9LekkugY+RcyeaiXBLKTveEGuWaGaKl3s2+dpssA4EgQE61zPvO83pDQdIp0fm5rbbpPSMDAf17sGqhs7Qp6DF+/RVFrS+J2iYD5zSSfSfWb5uMeodP535tjlugnaJvO6kvp/t2+Gz7Cc/StoIXX9wmcxLMx0UH+xyezcWTxyvIeU9Yn2TnoT5tuGZT+ic8RhOP3isHfMl5XNGLNDLCNgXY/ahiyGvXo1vTxhTGWfUm74OO0Rn9F+sAu0Ixx0N3JlYGYekbF4jSj70BrVAsxmlrrI+XinQttPxr66wiWR6RyEjuMG8bjSmGACCJXh/+suZ8B5UmMqqo2IKdqXTp5osSN2OioL0uWMA=
