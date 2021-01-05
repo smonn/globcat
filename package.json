@@ -23,22 +23,22 @@
     "async": "^3.2.0",
     "combined-stream2": "^1.1.2",
     "command-line-args": "^5.1.1",
-    "command-line-usage": "^6.1.0",
+    "command-line-usage": "^6.1.1",
     "glob": "^7.1.6"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.10.5",
-    "@babel/preset-env": "^7.10.4",
-    "@babel/register": "^7.10.5",
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.12.10",
+    "@babel/preset-env": "^7.12.11",
+    "@babel/register": "^7.12.10",
     "babel-eslint": "^10.1.0",
     "chai": "^4.2.0",
-    "eslint": "^7.5.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.4",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-prettier": "^3.3.1",
     "is-stream": "^2.0.0",
-    "mocha": "^8.0.1",
-    "prettier": "^2.0.5"
+    "mocha": "^8.2.1",
+    "prettier": "^2.2.1"
   },
   "bugs": {
     "url": "https://github.com/smonn/globcat/issues"
