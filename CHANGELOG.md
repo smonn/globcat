@@ -1,5 +1,12 @@
 # Changelog
 
+## 2.0.0
+
+- Updated package dependencies.
+- This package is now pure ESM.
+- Minimum Node.js version is now v12.
+- API is the same.
+
 ## 1.3.0
 
 - Updated package dependencies.

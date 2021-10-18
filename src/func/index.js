@@ -1,10 +1,10 @@
-const once = require('./once')
-const defaults = require('./defaults')
-const typeOf = require('./typeof')
-const flatten = require('./flatten')
-const unique = require('./unique')
+import defaults from './defaults.js'
+import flatten from './flatten.js'
+import once from './once.js'
+import typeOf from './typeof.js'
+import unique from './unique.js'
 
-module.exports = {
+export {
   /**
    * Copies all the keys and values from each argument into a new object. It will overwrite values
    * with the same key from separate objects from left to right, meaning the final argument take
@@ -14,7 +14,6 @@ module.exports = {
    * @return {Object} A new object.
    */
   defaults,
-
   /**
    * Flattens nested arrays into a one-level array.
    * @function
@@ -22,7 +21,6 @@ module.exports = {
    * @return {Array} The flattened array.
    */
   flatten,
-
   /**
    * Ensures a function is only called once.
    * @function
@@ -30,7 +28,6 @@ module.exports = {
    * @return {Function} A wrapper function.
    */
   once,
-
   /**
    * Returns the Object.prototype.toString representation of a value.
    * @function
@@ -38,7 +35,6 @@ module.exports = {
    * @return {String} A string description of the value type.
    */
   typeOf,
-
   /**
    * Filters out duplicate values by basic comparison.
    * @function

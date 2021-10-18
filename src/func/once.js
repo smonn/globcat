@@ -1,4 +1,4 @@
-module.exports = function (fn) {
+export default function (fn) {
   let value
   let called = false
 

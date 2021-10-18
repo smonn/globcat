@@ -1,11 +1,11 @@
-const path = require('path')
-const exec = require('child_process').exec
-const { assert } = require('chai')
+import { resolve } from 'node:path'
+import { exec } from 'node:child_process'
+import { assert } from 'chai'
 
 describe('globcat cli', function () {
   it('should execute without errors', function (done) {
     const cwd = process.cwd()
-    const file = path.resolve(cwd, 'dist', 'bin', 'globcat.js')
+    const file = resolve(cwd, 'dist', 'bin', 'globcat.js')
     const glob = `${cwd}/tests/**/*.txt`
     const command = `node ${file} ${glob}`
     exec(command, (err, stdout, stderr) => {

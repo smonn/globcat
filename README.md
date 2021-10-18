@@ -21,7 +21,7 @@ npm install [--global] globcat
 ## Usage
 
 ```javascript
-const globcat = require('globcat')
+import globca from 'globcat'
 const options = {
   /*...*/
 }
@@ -40,10 +40,10 @@ globcat(['path/to/file.txt', 'other/path/*.txt'], options, (err, contents) => {
 
 // as promise
 globcat(['path/to/file.txt', 'other/path/*.txt'], options)
-  .then(function(contents) {
+  .then(function (contents) {
     // use contents
   })
-  .catch(function(err) {
+  .catch(function (err) {
     // handle error
   })
 ```

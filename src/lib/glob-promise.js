@@ -1,11 +1,11 @@
-const glob = require('glob')
-const async = require('async')
-const func = require('../func')
+import { map } from 'async'
+import glob from 'glob'
+import * as func from '../func/index.js'
 
 function _makeGlobPromiseCallback(patterns, options) {
   patterns = Array.isArray(patterns) ? patterns : [patterns]
   return (resolve, reject) => {
-    async.map(
+    map(
       patterns,
       (pattern, done) => {
         glob(pattern, options, done)
@@ -27,6 +27,6 @@ function _makeGlobPromiseCallback(patterns, options) {
  * @param {Object} options - Options object sent to glob.
  * @return {Promise} A promise that resolves to a list of paths.
  */
-module.exports = function (patterns, options) {
+export default function (patterns, options) {
   return new Promise(_makeGlobPromiseCallback(patterns, options))
 }

@@ -3,7 +3,7 @@ function _contains(predicate, list) {
   return Boolean(list.filter(predicate)[firstIndex])
 }
 
-module.exports = function (list) {
+export default function (list) {
   let result = []
 
   list.forEach(function (item) {

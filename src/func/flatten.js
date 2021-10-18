@@ -3,7 +3,7 @@
  * @param  {Array} enumerable - An array with nested arrays.
  * @return {Array} The flattened array.
  */
-module.exports = function flatten(enumerable) {
+export default function flatten(enumerable) {
   let result = []
 
   if (Array.isArray(enumerable)) {

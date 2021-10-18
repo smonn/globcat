@@ -1,4 +1,4 @@
-module.exports = function (x) {
+export default function (x) {
   const firstMatch = 1
   const regexp = /^\[object (.*)\]$/
   return Object.prototype.toString

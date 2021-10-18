@@ -1,7 +1,7 @@
-const glob = require('./lib/glob-promise')
-const func = require('./func')
-const filesToStream = require('./lib/files-to-stream')
-const streamToString = require('./lib/stream-to-string')
+import glob from './lib/glob-promise.js'
+import * as func from './func/index.js'
+import filesToStream from './lib/files-to-stream.js'
+import streamToString from './lib/stream-to-string.js'
 
 const _defaults = {
   glob: {},
@@ -19,7 +19,7 @@ const _defaults = {
  * @returns {Promise} Returns a promise if no callback is provided.
  * @see {@link https://www.npmjs.com/package/glob}
  */
-module.exports = function (patterns, options, callback) {
+export default function (patterns, options, callback) {
   if (func.typeOf(options) === 'function') {
     callback = options
     options = {}

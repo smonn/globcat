@@ -1,6 +1,6 @@
-const typeOf = require('./typeof')
+import typeOf from './typeof.js'
 
-module.exports = function defaults() {
+export default function defaults() {
   const sources = Array.prototype.slice.call(arguments)
   const target = {}
 

@@ -1,11 +1,11 @@
 #! /usr/bin/env node
 
-const commandLineArgs = require('command-line-args')
-const commandLineUsage = require('command-line-usage')
-const fs = require('fs')
-const path = require('path')
-const readline = require('readline')
-const globcat = require('../globcat')
+import commandLineArgs from 'command-line-args'
+import commandLineUsage from 'command-line-usage'
+import { createWriteStream } from 'node:fs'
+import { join } from 'node:path'
+import { createInterface } from 'node:readline'
+import globcat from '../globcat.js'
 
 const optionList = [
   {
@@ -54,9 +54,7 @@ if (options.help) {
 function _makeWriteFunction(options) {
   return function (results) {
     if (options.output) {
-      const file = fs.createWriteStream(
-        path.join(process.cwd(), options.output)
-      )
+      const file = createWriteStream(join(process.cwd(), options.output))
       results.pipe(file)
     } else {
       results.pipe(process.stdout)
@@ -89,7 +87,7 @@ function _combine(options) {
     exec(options.src)
   } else {
     const lines = []
-    const rl = readline.createInterface({
+    const rl = createInterface({
       input: process.stdin,
       output: process.stdout,
       terminal: false
