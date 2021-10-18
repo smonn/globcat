@@ -1,7 +1,6 @@
 # globcat
 
 [![Travis](https://img.shields.io/travis/smonn/globcat.svg)](https://travis-ci.org/smonn/globcat)
-[![Dependency Status](https://david-dm.org/smonn/globcat.svg)](https://david-dm.org/smonn/globcat)
 [![Coverage Status](https://coveralls.io/repos/github/smonn/globcat/badge.svg?branch=master)](https://coveralls.io/github/smonn/globcat?branch=master)
 [![npm module downloads](http://img.shields.io/npm/dt/globcat.svg)](https://www.npmjs.org/package/globcat)
 [![npm version](https://img.shields.io/npm/v/globcat.svg)](https://www.npmjs.org/package/globcat)
@@ -21,7 +20,7 @@ npm install [--global] globcat
 ## Usage
 
 ```javascript
-import globca from 'globcat'
+import globcat from 'globcat'
 const options = {
   /*...*/
 }
