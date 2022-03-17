@@ -23,7 +23,7 @@
   "dependencies": {
     "async": "3.2.1",
     "combined-stream2": "1.1.2",
-    "command-line-args": "5.2.0",
+    "command-line-args": "5.2.1",
     "command-line-usage": "6.1.1",
     "glob": "7.2.0"
   },
