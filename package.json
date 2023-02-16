@@ -21,7 +21,7 @@
     "globcat": "dist/bin/globcat.js"
   },
   "dependencies": {
-    "async": "3.2.3",
+    "async": "3.2.4",
     "combined-stream2": "1.1.2",
     "command-line-args": "5.2.1",
     "command-line-usage": "6.1.3",
