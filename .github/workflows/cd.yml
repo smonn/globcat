@@ -1,9 +1,6 @@
-name: Continuous Deployment
+name: cd
 
-on:
-  release:
-    types:
-      - published
+on: workflow_dispatch
 
 jobs:
   build:
@@ -15,29 +12,32 @@ jobs:
         with:
           ref: ${{ github.event.release.target_commitish }}
 
-      - name: Setup Node.js LTS
+      - name: Install pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: latest
+
+      - name: Setup Node.js 16
         uses: actions/setup-node@v3
         with:
-          node-version: 'lts/*'
+          node-version: 16
+          cache: 'pnpm'
 
       - name: Install dependencies
-        uses: bahmutov/npm-install@v1
+        run: pnpm install --frozen-lockfile
 
       - name: Configure git
         run: |
-          git config --global user.name "GitHub CD bot"
-          git config --global user.email "44818+smonn@users.noreply.github.com"
+          git config --global user.name "${{ secrets.GIT_NAME }}"
+          git config --global user.email "${{ secrets.GIT_EMAIL }}"
       - name: Update version in package.json
-        run: npm version ${{ github.event.release.tag_name }} --allow-same-version
+        run: pnpm version ${{ github.event.release.tag_name }} --allow-same-version
 
       - name: Configure npm client for publish
-        run: npm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN }}"
-
-      - name: Build
-        run: npm run build
+        run: pnpm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN }}"
 
       - name: Publish package to npmjs.com
-        run: npm publish
+        run: pnpm publish --no-git-checks
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 

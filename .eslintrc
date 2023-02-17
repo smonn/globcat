@@ -1,9 +1,0 @@
-{
-  "env": {
-    "es2017": true,
-    "node": true,
-    "mocha": true
-  },
-  "parser": "@babel/eslint-parser",
-  "extends": ["eslint:recommended", "prettier"]
-}

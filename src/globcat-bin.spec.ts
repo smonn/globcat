@@ -1,13 +1,13 @@
 import { resolve } from 'node:path'
 import { exec } from 'node:child_process'
-import { assert } from 'chai'
+import { assert, test } from 'vitest'
 
-describe('globcat cli', function () {
-  it('should execute without errors', function (done) {
-    const cwd = process.cwd()
-    const file = resolve(cwd, 'dist', 'bin', 'globcat.js')
-    const glob = `${cwd}/tests/**/*.txt`
-    const command = `node ${file} ${glob}`
+test('should execute without errors', () => {
+  const cwd = process.cwd()
+  const file = resolve(cwd, 'dist', 'globcat-bin.js')
+  const glob = `${cwd}/test-files/**/*.txt`
+  const command = `node ${file} ${glob}`
+  return new Promise<void>((done) => {
     exec(command, (err, stdout, stderr) => {
       assert.notExists(err, 'no errors')
       assert.equal(stderr, '', 'should not have error output')
