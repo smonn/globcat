@@ -1,11 +1,13 @@
 #! /usr/bin/env node
 
-import commandLineArgs from 'command-line-args'
+import commandLineArgs, { CommandLineOptions } from 'command-line-args'
 import commandLineUsage from 'command-line-usage'
-import { createWriteStream } from 'node:fs'
-import { join } from 'node:path'
-import { createInterface } from 'node:readline'
-import globcat from '../globcat.js'
+import FS from 'node:fs'
+import Path from 'node:path'
+import process from 'node:process'
+import Readline from 'node:readline'
+import type Stream from 'node:stream'
+import { globcat } from './globcat.js'
 
 const optionList = [
   {
@@ -43,18 +45,22 @@ const usage = [
 
 const options = commandLineArgs(optionList)
 
-if (options.help) {
+if (options['help']) {
   process.stdout.write(commandLineUsage(usage) + '\n')
 } else {
-  _combine(options)
+  _combine(options).catch((error) => {
+    throw error
+  })
 }
 
 // <editor-fold>
 
-function _makeWriteFunction(options) {
-  return function (results) {
-    if (options.output) {
-      const file = createWriteStream(join(process.cwd(), options.output))
+function _makeWriteFunction(options: CommandLineOptions) {
+  return function (results: Stream.Readable) {
+    if (options['output']) {
+      const file = FS.createWriteStream(
+        Path.join(process.cwd(), options['output'] as string)
+      )
       results.pipe(file)
     } else {
       results.pipe(process.stdout)
@@ -62,39 +68,35 @@ function _makeWriteFunction(options) {
   }
 }
 
-function _makeCallbackFunction(options) {
+function _makeExecFunction(options: CommandLineOptions) {
   const write = _makeWriteFunction(options)
-  return function (err, results) {
-    if (err) {
-      throw err
-    } else {
-      write(results)
-    }
+  return async (patterns: string[]) => {
+    const content = await globcat(patterns, { stream: true })
+    write(content)
   }
 }
 
-function _makeExecFunction(options) {
-  const callback = _makeCallbackFunction(options)
-  return function (patterns) {
-    globcat(patterns, { stream: true }, callback)
-  }
-}
-
-function _combine(options) {
+async function _combine(options: CommandLineOptions) {
   const exec = _makeExecFunction(options)
 
-  if (options.src) {
-    exec(options.src)
+  const patterns = options['src'] as string[] | undefined
+
+  if (patterns) {
+    await exec(patterns)
   } else {
-    const lines = []
-    const rl = createInterface({
+    const lines: string[] = []
+    const rl = Readline.createInterface({
       input: process.stdin,
       output: process.stdout,
       terminal: false
     })
 
     rl.on('line', (line) => lines.push(line))
-    rl.on('close', () => exec(lines))
+    rl.on('close', () => {
+      exec(lines).catch((error) => {
+        throw error
+      })
+    })
   }
 }
 

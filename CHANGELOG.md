@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.0.0
+
+- Refactored to use TypeScript and modern ES/Node.js features.
+- Minimum Node.js version is now v16.
+- Ships ESM and CJS versions.
+- Upgraded package dependencies, in particular using Glob v8.
+- Switched to Vite, Vitest, and pnpm.
+- API is the same, but some internals changed.
+
 ## 2.0.0
 
 - Updated package dependencies.
