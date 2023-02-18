@@ -33,6 +33,7 @@
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts,.tsx",
     "ci": "run-s lint coverage build",
+    "prepublishOnly": "pnpm run ci",
     "prepare": "husky install"
   },
   "dependencies": {
