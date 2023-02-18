@@ -1,7 +1,7 @@
 import { defineConfig } from 'vite'
 import dts from 'vite-plugin-dts'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 import packageJSON from './package.json'
-// import externals from 'rollup-plugin-node-externals'
 
 const separators = new RegExp(/[-_/]+/, 'g')
 const nonWord = new RegExp(/[^\w\s]/, 'g')
@@ -23,24 +23,23 @@ function toPascalCase(text: string) {
 
 export default defineConfig({
   build: {
+    minify: false,
     lib: {
       entry: ['src/globcat.ts', 'src/globcat-bin.ts'],
       name: toPascalCase(packageJSON.name)
-      // fileName: 'index'
     },
     rollupOptions: {
-      external: [
-        'command-line-args',
-        'command-line-usage',
-        'glob',
-        'node:fs',
-        'node:fs/promises',
-        'node:path',
-        'node:process',
-        'node:readline',
-        'node:stream',
-        'node:util'
-      ]
+      external: [/^node:/, ...Object.keys(packageJSON.dependencies)],
+      plugins: [nodeResolve()],
+      output: {
+        banner(chunkInfo) {
+          if (chunkInfo.name === 'globcat-bin') {
+            return '#! /usr/bin/env node\n'
+          }
+
+          return ''
+        }
+      }
     }
   },
   plugins: [

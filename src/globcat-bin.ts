@@ -4,10 +4,10 @@ import commandLineArgs, { CommandLineOptions } from 'command-line-args'
 import commandLineUsage from 'command-line-usage'
 import FS from 'node:fs'
 import Path from 'node:path'
+import process from 'node:process'
 import Readline from 'node:readline'
 import type Stream from 'node:stream'
-import { globcat } from './globcat'
-import process from 'node:process'
+import { globcat } from './globcat.js'
 
 const optionList = [
   {
@@ -70,8 +70,8 @@ function _makeWriteFunction(options: CommandLineOptions) {
 
 function _makeExecFunction(options: CommandLineOptions) {
   const write = _makeWriteFunction(options)
-  return async (pattern: string) => {
-    const content = await globcat(pattern, { stream: true })
+  return async (patterns: string[]) => {
+    const content = await globcat(patterns, { stream: true })
     write(content)
   }
 }
@@ -82,9 +82,7 @@ async function _combine(options: CommandLineOptions) {
   const patterns = options['src'] as string[] | undefined
 
   if (patterns) {
-    for (const pattern of patterns) {
-      await exec(pattern)
-    }
+    await exec(patterns)
   } else {
     const lines: string[] = []
     const rl = Readline.createInterface({
@@ -95,7 +93,7 @@ async function _combine(options: CommandLineOptions) {
 
     rl.on('line', (line) => lines.push(line))
     rl.on('close', () => {
-      Promise.all(lines.map((line) => exec(line))).catch((error) => {
+      exec(lines).catch((error) => {
         throw error
       })
     })

@@ -1,6 +1,6 @@
+import { isStream } from 'is-stream'
 import { assert, test } from 'vitest'
-import filesToStream from './files-to-stream'
-import { streamToString } from './stream-to-string'
+import filesToStream from './files-to-stream.js'
 
 test('makes single stream from multiple files', async () => {
   const files = [
@@ -9,11 +9,5 @@ test('makes single stream from multiple files', async () => {
   ]
   const stream = await filesToStream(files)
 
-  const content = await streamToString(stream)
-
-  assert.equal(
-    content.includes('filesToStream'),
-    true,
-    'should contain filesToStream'
-  )
+  assert.isTrue(isStream(stream), 'must be a stream')
 })

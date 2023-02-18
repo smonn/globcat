@@ -1,13 +1,14 @@
-import { assert, expect, test } from 'vitest'
 import { isReadableStream } from 'is-stream'
 import { join } from 'node:path'
-import { globcat } from './globcat'
+import { assert, expect, test } from 'vitest'
+import { globcat } from './globcat.js'
 
 test('should include each file only once', async () => {
   const cwd = process.cwd()
   const pattern = join(cwd, 'test-files/**/*.txt')
+  const other = join(cwd, 'test-files/foo.txt')
 
-  const content = await globcat(pattern)
+  const content = await globcat([pattern, other])
 
   assert.match(content, /bar\s+baz\s+foo\s+/, 'should equal file contents')
 })

@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "checkJs": true,
@@ -9,11 +10,11 @@
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "lib": [
-      "ESNext",
+      "es2021",
       "DOM"
     ],
-    "module": "ESNext",
-    "moduleResolution": "Node",
+    "module": "es2022",
+    "moduleResolution": "node",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -25,7 +26,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "ESNext",
+    "target": "es2021",
     "useDefineForClassFields": true
   },
   "include": [

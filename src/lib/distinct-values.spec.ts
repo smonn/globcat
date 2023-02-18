@@ -1,5 +1,5 @@
 import { assert, test } from 'vitest'
-import { distinctValues } from './distinct-values'
+import { distinctValues } from './distinct-values.js'
 
 test('should filter out duplicate values', () => {
   const list = ['foo', 'bar', 'baz', 'foo']

@@ -1,8 +1,9 @@
 import glob from 'glob'
 import Stream from 'node:stream'
 import util from 'node:util'
-import filesToStream from './lib/files-to-stream'
-import { streamToString } from './lib/stream-to-string'
+import { distinctValues } from './lib/distinct-values.js'
+import filesToStream from './lib/files-to-stream.js'
+import { streamToString } from './lib/stream-to-string.js'
 
 const globAsync = util.promisify(glob)
 
@@ -27,26 +28,29 @@ const defaultOptions: GlobcatOptions = {
  * @see {@link https://www.npmjs.com/package/glob}
  */
 function globcat(
-  pattern: string,
+  patterns: string | string[],
   options: GlobcatOptions & { stream: false },
   callback: GlobcatCallback<string>
 ): void
 function globcat(
-  pattern: string,
+  patterns: string | string[],
   options: GlobcatOptions & { stream: true },
   callback: GlobcatCallback<Stream.Readable>
 ): void
-function globcat(pattern: string, callback: GlobcatCallback<string>): void
 function globcat(
-  pattern: string,
+  patterns: string | string[],
+  callback: GlobcatCallback<string>
+): void
+function globcat(
+  patterns: string | string[],
   options?: GlobcatOptions & { stream: false }
 ): Promise<string>
 function globcat(
-  pattern: string,
+  patterns: string | string[],
   options: GlobcatOptions & { stream: true }
 ): Promise<Stream.Readable>
 function globcat(
-  pattern: string,
+  patterns: string | string[],
   options?:
     | GlobcatOptions
     | GlobcatCallback<string>
@@ -59,16 +63,24 @@ function globcat(
   }
 
   const config = Object.assign({}, defaultOptions, options)
+  patterns = Array.isArray(patterns) ? patterns : [patterns]
 
-  const promise = globAsync(pattern, {
-    cwd: process.cwd(),
-    ...config.glob
-  })
-    .then((files) => {
+  const promise = Promise.all(
+    patterns.map((pattern) => {
+      return globAsync(pattern, {
+        cwd: process.cwd(),
+        ...config.glob
+      })
+    })
+  )
+    .then((results) => {
+      const files = results.flat()
+
       if (files.length === 0) {
         return Stream.Readable.from([''])
       }
-      return filesToStream(files)
+
+      return filesToStream(distinctValues(files))
     })
     .then((stream) => {
       const result = config.stream ? stream : streamToString(stream)
