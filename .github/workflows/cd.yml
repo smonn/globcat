@@ -31,7 +31,7 @@ jobs:
           git config --global user.name "${{ secrets.GIT_NAME }}"
           git config --global user.email "${{ secrets.GIT_EMAIL }}"
       - name: Update version in package.json
-        run: pnpm version ${{ github.event.release.tag_name }} --allow-same-version
+        run: pnpm version ${{ github.ref_name }} --allow-same-version
 
       - name: Configure npm client for publish
         run: pnpm config set '//registry.npmjs.org/:_authToken' "${{ secrets.NPM_TOKEN }}"
