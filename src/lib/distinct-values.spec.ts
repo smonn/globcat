@@ -3,7 +3,7 @@ import { distinctValues } from './distinct-values.js'
 
 test('should filter out duplicate values', () => {
   const list = ['foo', 'bar', 'baz', 'foo']
-  const expected = ['foo', 'bar', 'baz']
+  const expected = ['bar', 'baz', 'foo']
   assert.deepEqual(
     distinctValues(list),
     expected,

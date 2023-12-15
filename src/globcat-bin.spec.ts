@@ -5,8 +5,8 @@ import { assert, test } from 'vitest'
 test('should execute without errors', () => {
   const cwd = process.cwd()
   const file = resolve(cwd, 'src', 'globcat-bin.ts')
-  const glob = `'test-files/**/*.txt' 'test-files/foo.txt'`
-  const command = `pnpm ts-node-esm --transpileOnly --project tsconfig.json ${file} ${glob}`
+  const glob = `'test-files/small/**/*.txt' 'test-files/small/foo.txt'`
+  const command = `pnpm tsx ${file} ${glob}`
   return new Promise<void>((done) => {
     exec(
       command,

@@ -1,14 +1,11 @@
-import glob from 'glob'
+import { glob, GlobOptions } from 'glob'
 import Stream from 'node:stream'
-import util from 'node:util'
 import { distinctValues } from './lib/distinct-values.js'
 import filesToStream from './lib/files-to-stream.js'
 import { streamToString } from './lib/stream-to-string.js'
 
-const globAsync = util.promisify(glob)
-
 export interface GlobcatOptions {
-  glob?: glob.IOptions
+  glob?: GlobOptions
   stream?: boolean
 }
 
@@ -65,17 +62,11 @@ function globcat(
   const config = Object.assign({}, defaultOptions, options)
   patterns = Array.isArray(patterns) ? patterns : [patterns]
 
-  const promise = Promise.all(
-    patterns.map((pattern) => {
-      return globAsync(pattern, {
-        cwd: process.cwd(),
-        ...config.glob
-      })
-    })
-  )
-    .then((results) => {
-      const files = results.flat()
-
+  const promise = glob(patterns, {
+    ...(config.glob ?? {}),
+    withFileTypes: false
+  })
+    .then((files) => {
       if (files.length === 0) {
         return Stream.Readable.from([''])
       }
