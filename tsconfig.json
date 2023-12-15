@@ -1,20 +1,17 @@
 {
   "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "checkJs": true,
     "esModuleInterop": true,
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "lib": [
-      "es2021",
-      "DOM"
+      "ES2021"
     ],
-    "module": "es2022",
-    "moduleResolution": "node",
+    "module": "ES2020",
+    "moduleResolution": "Bundler",
     "noEmit": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitOverride": true,
@@ -26,11 +23,10 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,
-    "target": "es2021",
-    "useDefineForClassFields": true
+    "target": "ES2021"
   },
   "include": [
     "src",
     "vite.config.ts"
-  ],
+  ]
 }

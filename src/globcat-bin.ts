@@ -1,5 +1,3 @@
-#! /usr/bin/env node
-
 import commandLineArgs, { CommandLineOptions } from 'command-line-args'
 import commandLineUsage from 'command-line-usage'
 import FS from 'node:fs'

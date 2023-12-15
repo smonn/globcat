@@ -32,6 +32,7 @@ export default defineConfig({
       external: [/^node:/, ...Object.keys(packageJSON.dependencies)],
       plugins: [nodeResolve()],
       output: {
+        dir: 'dist',
         banner(chunkInfo) {
           if (chunkInfo.name === 'globcat-bin') {
             return '#! /usr/bin/env node\n'

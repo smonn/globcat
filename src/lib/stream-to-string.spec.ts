@@ -3,7 +3,7 @@ import { assert, test } from 'vitest'
 import { streamToString } from './stream-to-string.js'
 
 test('converts a stream to a string', async () => {
-  const fileStream = createReadStream('test-files/foo.txt')
+  const fileStream = createReadStream('test-files/small/foo.txt')
 
   const content = await streamToString(fileStream)
 

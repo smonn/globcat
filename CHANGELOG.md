@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.1.0
+
+- Fix [#144](https://github.com/smonn/globcat/issues/144). Somewhat breaking change: previously the order of the concatenated files was undefined. With this change the content will appear based on the alphabetical order of the included files. This means if you have file `a.txt` and `b.txt`, everything in file `a.txt` will appear before content from `b.txt`.
+- Dependency version bumps.
+
 ## 3.0.0
 
 - Refactored to use TypeScript and modern ES/Node.js features.
