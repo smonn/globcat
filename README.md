@@ -1,7 +1,5 @@
 # globcat
 
-[![Travis](https://img.shields.io/travis/smonn/globcat.svg)](https://travis-ci.org/smonn/globcat)
-[![Coverage Status](https://coveralls.io/repos/github/smonn/globcat/badge.svg?branch=master)](https://coveralls.io/github/smonn/globcat?branch=master)
 [![npm module downloads](http://img.shields.io/npm/dt/globcat.svg)](https://www.npmjs.org/package/globcat)
 [![npm version](https://img.shields.io/npm/v/globcat.svg)](https://www.npmjs.org/package/globcat)
 [![node version](https://img.shields.io/node/v/globcat.svg)](https://www.npmjs.org/package/globcat)
@@ -9,7 +7,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/smonn/globcat.svg)](https://github.com/smonn/globcat/issues)
 [![prettier.io](https://img.shields.io/badge/code%20style-prettier.io-brightgreen.svg)](https://prettier.io)
 
-Concatenate files from command line with glob pattern.
+Concatenate files in alphabetical order from command line with glob pattern.
 
 ## Install
 
